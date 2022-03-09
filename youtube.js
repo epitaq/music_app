@@ -26,9 +26,13 @@ function onYouTubeIframeAPIReady() {
 // }
 
 
-function stopVideo() {
+function nextVideo() {
     //player.stopVideo();
-    player.nextVideo();
+    // player.nextVideo();
+    var status = player.getPlayerState()
+    if (status == 1) {
+        player.nextVideo();
+    }
 }
 
 // player.cuePlaylist({listType: 'playlist',
@@ -53,7 +57,7 @@ function onPlayerStateChange (event) {
     var status = event.data
     console.log(status)
     if (status == 1) {
-        setTimeout(stopVideo, 6000)
+        setTimeout(nextVideo, 6000)
     }
     // if (status == 2) {
     //     player.nextVideo();
