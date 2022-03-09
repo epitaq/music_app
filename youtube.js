@@ -16,14 +16,11 @@ function onYouTubeIframeAPIReady() {
         events: {
             'onReady': onPlayerReady,
             'onStateChange': onPlayerStateChange
-        }
+        },
+        // playerVars: {
+        // }
     });
 }
-
-// function timeControl () {
-//     player.seekTo(3, true);
-//     setTimeout(stopVideo, 6000);
-// }
 
 
 function nextVideo() {
@@ -32,23 +29,20 @@ function nextVideo() {
     var status = player.getPlayerState()
     if (status == 1) {
         player.nextVideo();
-    }
+    } 
 }
 
-// player.cuePlaylist({listType: 'playlist',
-//     list: ['M7lc1UVf-VE','ak70cSvN4s0','Bh2IuX7C1IQ'],
-//     index: 0,
-//     startSeconds: 5,
-// })
+function seekTo () {
+    player.seekTo(3,true)
+}
+
 
 // onReadyのコールバック関数
 function onPlayerReady() {
     player.cuePlaylist({
         'listType': 'search',
-        //'playlist': ['ak70cSvN4s0','M7lc1UVf-VE','Bh2IuX7C1IQ'],
-        'playlist': ['M7lc1UVf-VE'],
+        'playlist': ['M7lc1UVf-VE','68KV7JnrvDo','glbYC6rBn3g'],
         'index': 0,
-        //'startSeconds': 3,
         'suggestedQuality': 'small'
     });
 }
@@ -64,4 +58,3 @@ function onPlayerStateChange (event) {
     // }
 }
 
-// 止めても時間が経つと再生しちゃう　それ以外はいい感じ
