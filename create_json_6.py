@@ -5,7 +5,7 @@ def main () :
     video_list = []
     count = 0
     title = []
-    with open ('videoList.csv','r', encoding="utf-8") as f:
+    with open ('videoList1.csv','r', encoding="utf-8") as f:
         reader = csv.reader(f)
         for row in reader:
             if count == 0:
