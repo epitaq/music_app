@@ -4,11 +4,11 @@
 videoListJson = {
     "content": [
         {
-            "id": "bQBHMPmgX8w-8:36",
+            "id": "bQBHMPmgX8w-9:20",
             "movie": "bQBHMPmgX8w",
             "name": "ときのそら",
             "title": "KumoHurray!",
-            "start": 516,
+            "start": 560,
             "end": 744
         },
         {
@@ -96,6 +96,14 @@ for (var i=0; i<videoList.length; i++){
     newMovieLi.querySelector('.name').textContent = videoList[i]['name']
     // 追加
     movieUl.appendChild(newMovieLi);
+    console.log(newMovieLi)
 }
+
+// 指定した動画を再生
+function siteividoe (num) {
+    videoIndex = num
+    onPlayerStateChange()
+}
+
 
 
