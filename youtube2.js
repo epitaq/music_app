@@ -80,14 +80,20 @@ function onPlayerStateChange(event){
 }
 
 // 動画のリストをhtmlに作成
-var vList = videoJson['videoList'] 
-var list = document.getElementById('movieList')
-// list.innerHTML = ''
+var vList = videoJson['videoList'] ;
+var movieUl = document.getElementById('movie-ul');
+var templateLi = document.getElementById('template-li');
+
 for (var i=0; i<vList.length; i++){
-    //var listValue = '<li>' + vList[i] + '</li>'
-    var listValue = '<li><a href=\'https://youtu.be/' + vList[i] + '\'><img src=\'https://img.youtube.com/vi/' + vList[i] + '/default.jpg\'>' + vList[i] + '</img></a></li>'
-    console.log(listValue)
-    list.innerHTML += listValue
+    var newMovieLi = templateLi.content.cloneNode(true);
+    // 編集
+    newMovieLi.querySelector('.movieLi').id = vList[i]
+    newMovieLi.querySelector('.url').href = 'https://youtu.be/' + vList[i]
+    newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + vList[i] + '/default.jpg'
+    newMovieLi.querySelector('.img').alt = vList[i]
+    newMovieLi.querySelector('.title').textContent = 'title:' + vList[i]
+    newMovieLi.querySelector('.name').textContent = 'name:' + vList[i]
+    // 追加
+    movieUl.appendChild(newMovieLi);
 }
 
-// '<img src=/'https://img.youtube.com/vi/' + vList[i] + '/default.jpg/'>'

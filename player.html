@@ -6,7 +6,18 @@
     <body>
         <!-- iframe -->
         <div id="player"></div>
-        <ul id="movieList"></ul>
+        <ul id="movie-ul">
+            <template id="template-li">
+                <li class="movieLi">
+                    <a href="" class="url">
+                        <img class="img">
+                        <p class="title"></p>
+                        <p class="name"></p>
+                    </a>
+                </li>
+            </template>
+        </ul>
+
         <script type="text/javascript" src="youtube2.js"></script>
     </body>
 </html>
