@@ -20,6 +20,7 @@ def main () :
     # print(video_json)
     fw = open('videoList.json','w')
     json.dump({'contents':video_list}, fw, indent=4)
+    print(video_json)
 
 if __name__ == '__main__':
     main()
