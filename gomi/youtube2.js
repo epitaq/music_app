@@ -54,7 +54,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 // 動画リスト
-// var videoList = [['M7lc1UVf-VE',10,14], ['68KV7JnrvDo',2,5], ['glbYC6rBn3g',4,6]]
 var videoList = videoJson['contents']
 //console.log(videoList)
 //console.log(videoList.length)
@@ -87,12 +86,12 @@ var templateLi = document.getElementById('template-li');
 for (var i=0; i<vList.length; i++){
     var newMovieLi = templateLi.content.cloneNode(true);
     // 編集
-    newMovieLi.querySelector('.movieLi').id = vList[i]
-    newMovieLi.querySelector('.url').href = 'https://youtu.be/' + vList[i]
-    newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + vList[i] + '/default.jpg'
-    newMovieLi.querySelector('.img').alt = vList[i]
-    newMovieLi.querySelector('.title').textContent = 'title:' + vList[i]
-    newMovieLi.querySelector('.name').textContent = 'name:' + vList[i]
+    newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
+    newMovieLi.querySelector('.url').href = 'https://youtu.be/' + videoList[i]['movie']
+    newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
+    newMovieLi.querySelector('.img').alt = videoList[i]['movie']
+    newMovieLi.querySelector('.title').textContent = 'title:' + videoList[i]['id']
+    newMovieLi.querySelector('.name').textContent = 'name:' + videoList[i]['id']
     // 追加
     movieUl.appendChild(newMovieLi);
 }
