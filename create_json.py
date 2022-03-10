@@ -15,11 +15,15 @@ def main () :
                 count += 1
                 video_dic = {title[i] : row[i] for i in range(len(title))}
                 video_list.append(video_dic)
+    # print(video_list)
+    video_all = [video_list[i]['id'] for i in range(len(video_list))]
+    print(video_all)
+    video_list = {'contents':video_list, 'videoList':video_all}
     # JSONの作成＆保存
-    video_json = json.dumps({'contents':video_list}, indent=4)
+    video_json = json.dumps(video_list, indent=4)
     # print(video_json)
     fw = open('videoList.json','w')
-    json.dump({'contents':video_list}, fw, indent=4)
+    json.dump(video_list, fw, indent=4)
     print(video_json)
 
 if __name__ == '__main__':
