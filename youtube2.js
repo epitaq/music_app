@@ -1,23 +1,28 @@
-videoJson = {
+videoJson ={
     "contents": [
         {
-            "Id": "M7lc1UVf-VE",
+            "id": "M7lc1UVf-VE",
             "movie": "M7lc1UVf-VE",
             "start": "10",
             "end": "14"
         },
         {
-            "Id": "68KV7JnrvDo",
+            "id": "68KV7JnrvDo",
             "movie": "68KV7JnrvDo",
             "start": "2",
             "end": "5"
         },
         {
-            "Id": "glbYC6rBn3g",
+            "id": "glbYC6rBn3g",
             "movie": "glbYC6rBn3g",
             "start": "4",
             "end": "6"
         }
+    ],
+    "videoList": [
+        "M7lc1UVf-VE",
+        "68KV7JnrvDo",
+        "glbYC6rBn3g"
     ]
 }
 
@@ -73,3 +78,16 @@ function onPlayerStateChange(event){
         done = false;
     }
 }
+
+// 動画のリストをhtmlに作成
+var vList = videoJson['videoList'] 
+var list = document.getElementById('movieList')
+// list.innerHTML = ''
+for (var i=0; i<vList.length; i++){
+    //var listValue = '<li>' + vList[i] + '</li>'
+    var listValue = '<li><a href=\'https://youtu.be/' + vList[i] + '\'><img src=\'https://img.youtube.com/vi/' + vList[i] + '/default.jpg\'>' + vList[i] + '</img></a></li>'
+    console.log(listValue)
+    list.innerHTML += listValue
+}
+
+// '<img src=/'https://img.youtube.com/vi/' + vList[i] + '/default.jpg/'>'
