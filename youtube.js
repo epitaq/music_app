@@ -246,8 +246,18 @@ function fisherYatesShuffle(arr){
 }
 // videoList をシャッフル
 function videoListShuffle (){
+    var nowVideoId = videoList[videoIndex].id
     videoList = fisherYatesShuffle(videoList)
-    console.log(videoList)
+    for (var i=0; i<videoList.length; i++){
+        if (videoList[i].id == nowVideoId) {
+            videoIndex = i
+            if (videoIndex > videoList.length-1){
+                videoIndex = 0
+            }
+            console.log(videoIndex)
+        }
+    }
+    // console.log(videoList)
     htmlVideoList()
 }
 

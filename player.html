@@ -7,7 +7,7 @@
             .columns{
                 display: flex;
                 width: 100%;
-                height: 100%;
+                height: 100vh;
                 padding: 0 56px;
             }
             .primary{
@@ -22,11 +22,11 @@
             .secondary{
                 flex: 1;
                 width: 100%;
-                height: 100%;
+                height: 90vh;
                 overflow-y: scroll;
             }
             .movieLi{
-                margin-top: 5%;
+                margin-top: 0.5rem;
             }
             .link{
                 display: flex;
@@ -51,14 +51,17 @@
     </head>
     <body>
         <button onclick="videoListShuffle();"></button>
-        <!-- iframe -->
+        <!-- 動画と動画再生リスト -->
         <div class="columns">
+            <!-- 動画プレイヤー -->
             <div class="primary">
                 <div id="player" class="player"></div>
             </div>
+            <!-- 動画再生リスト -->
             <div class="secondary">
                 <ul id="movie-ul">
                 </ul>
+                <!-- テンプレート -->
                 <template id="template-li">
                     <li class="movieLi" >
                         <div class="link">
@@ -72,6 +75,7 @@
                 </template>
             </div>
         </div>
+        <!-- コントトールパネル -->
         <script type="text/javascript" src="youtube.js"></script>
     </body>
 </html>
