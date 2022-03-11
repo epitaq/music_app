@@ -47,7 +47,7 @@ videoListJson = {
             "id": "Lw3sBpkC3Rw-23:22",
             "movie": "Lw3sBpkC3Rw",
             "name": "ロボ子",
-            "title": "フォイニ",
+            "title": "",
             "start": 1402,
             "end": 1592
         }
@@ -116,24 +116,26 @@ for (var i=0; i<videoList.length; i++){
     var newMovieLi = templateLi.content.cloneNode(true);
     // 編集
     newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-    newMovieLi.querySelector('.url').href = 'https://youtu.be/' + videoList[i]['movie']
+    newMovieLi.querySelector('.link').addEventListener('click', test, false);
     newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
     newMovieLi.querySelector('.img').alt = videoList[i]['movie']
     newMovieLi.querySelector('.title').textContent = videoList[i]['title']
     newMovieLi.querySelector('.name').textContent = videoList[i]['name']
     // 追加
     movieUl.appendChild(newMovieLi);
-    console.log(newMovieLi)
 }
 
 // 指定した動画を再生
-function siteVidoe (num) {
-    player.loadVideoById({
-        videoId: videoList[num].movie,
-        startSeconds:  videoList[num].start,
-        endSeconds: videoList[num].end
+function siteVideo (num) {
+    videoIndex = num
+    player.loadVideoById({videoId:videoList[videoIndex].movie,
+        startSeconds:videoList[videoIndex].start,
+        endSeconds:videoList[videoIndex].end,
     })
 }
 
+function test () {
+    console.log(i)
+}
 
 

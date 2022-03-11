@@ -4,9 +4,6 @@
         <meta charset="utf-8"/>
         <title>test</title>
         <style>
-            .url{
-                display: flex;
-            }
             .columns{
                 display: flex;
                 width: 100vw;
@@ -24,6 +21,9 @@
             .movieLi{
                 margin-top: 10%;
             }
+            .link{
+                display: flex;
+            }
             .player{
                 margin: auto;
             }
@@ -38,12 +38,12 @@
             <div class="secondary">
                 <ul id="movie-ul">
                     <template id="template-li">
-                        <li class="movieLi">
-                            <a href="" class="url">
+                        <li class="movieLi" >
+                            <div class="link">
                                 <img class="img">
                                 <p class="title"></p>
                                 <p class="name"></p>
-                            </a>
+                            </div>
                         </li>
                     </template>
                 </ul>
