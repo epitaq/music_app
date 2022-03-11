@@ -116,7 +116,7 @@ for (var i=0; i<videoList.length; i++){
     var newMovieLi = templateLi.content.cloneNode(true);
     // 編集
     newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-    newMovieLi.querySelector('.link').addEventListener('click', test, false);
+    newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:siteVideo}, false);
     newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
     newMovieLi.querySelector('.img').alt = videoList[i]['movie']
     newMovieLi.querySelector('.title').textContent = videoList[i]['title']
@@ -127,15 +127,24 @@ for (var i=0; i<videoList.length; i++){
 
 // 指定した動画を再生
 function siteVideo (num) {
-    videoIndex = num
+    videoIndex = this.index
     player.loadVideoById({videoId:videoList[videoIndex].movie,
         startSeconds:videoList[videoIndex].start,
         endSeconds:videoList[videoIndex].end,
     })
 }
 
-function test () {
-    console.log(i)
+// シャッフル用
+function fisherYatesShuffle(arr){
+    for(var i =arr.length-1 ; i>0 ;i--){
+        var j = Math.floor( Math.random() * (i + 1) ); //random index
+        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+    }
+    return arr
 }
-
+// videoList をシャッフル
+function videoListShuffle (){
+    videoList = fisherYatesShuffle(videoList)
+    console.log(videoList)
+}
 
