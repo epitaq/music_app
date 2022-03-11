@@ -66,8 +66,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '360',
-        width: '640',
+        height: sh/2.1,
+        width: sw/2.1,
         videoId: videoList[videoIndex].movie,
         playerVars: {
             start: videoList[videoIndex].start,
@@ -78,6 +78,9 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
+
+var sw = window.screen.width; // 画面の横幅
+var sh = window.screen.height; // 画面の高さ
 
 // 再生する動画のindex
 var videoIndex = 0
@@ -124,9 +127,12 @@ for (var i=0; i<videoList.length; i++){
 }
 
 // 指定した動画を再生
-function siteividoe (num) {
-    videoIndex = num
-    onPlayerStateChange()
+function siteVidoe (num) {
+    player.loadVideoById({
+        videoId: videoList[num].movie,
+        startSeconds:  videoList[num].start,
+        endSeconds: videoList[num].end
+    })
 }
 
 
