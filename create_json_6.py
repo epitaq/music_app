@@ -4,7 +4,7 @@ import csv
 def main () :
     count = 0
     videoList = []
-    with open ('videoList2.csv','r', encoding="utf-8") as f:
+    with open ('videoList3.csv','r', encoding="utf-8") as f:
         reader = csv.reader(f)
         for row in reader:
             print(row)
@@ -45,7 +45,7 @@ def main () :
     videoList_dump = json.dumps(videoList, indent=4, ensure_ascii=False)
     print(videoList_dump)
     # 保存
-    fw = open('videoList2.json','w')
+    fw = open('videoList3.json','w')
     json.dump(videoList, fw, indent=4, ensure_ascii=False)
 
 
