@@ -4,11 +4,11 @@
 videoListJson = {
     "content": [
         {
-            "id": "bQBHMPmgX8w-8:36",
+            "id": "bQBHMPmgX8w-9:20",
             "movie": "bQBHMPmgX8w",
             "name": "ときのそら",
             "title": "KumoHurray!",
-            "start": 516,
+            "start": 560,
             "end": 744
         },
         {
@@ -47,7 +47,7 @@ videoListJson = {
             "id": "Lw3sBpkC3Rw-23:22",
             "movie": "Lw3sBpkC3Rw",
             "name": "ロボ子",
-            "title": "",
+            "title": "フォイニ",
             "start": 1402,
             "end": 1592
         }
@@ -66,8 +66,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: sh/2.1,
-        width: sw/2.1,
+        height: document.getElementById('player').clientHeight,//window.screen.height/2,
+        width: document.getElementById('player').clientWidth,//window.screen.width/2,
         videoId: videoList[videoIndex].movie,
         playerVars: {
             start: videoList[videoIndex].start,
@@ -80,8 +80,8 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-var sw = window.screen.width; // 画面の横幅
-var sh = window.screen.height; // 画面の高さ
+// var sw = window.screen.width; // 画面の横幅
+// var sh = window.screen.height; // 画面の高さ
 
 // 再生する動画のindex
 var videoIndex = 0
