@@ -19,7 +19,7 @@
                 overflow-y: scroll;
             }
             .movieLi{
-                margin-top: 10%;
+                margin-top: 5%;
             }
             .link{
                 display: flex;
@@ -27,9 +27,13 @@
             .player{
                 margin: auto;
             }
+            html, body{
+                overflow: hidden;
+            }
         </style>
     </head>
     <body>
+        <button onclick="videoListShuffle();"></button>
         <!-- iframe -->
         <div class="columns">
             <div class="primary">
@@ -37,16 +41,16 @@
             </div>
             <div class="secondary">
                 <ul id="movie-ul">
-                    <template id="template-li">
-                        <li class="movieLi" >
-                            <div class="link">
-                                <img class="img">
-                                <p class="title"></p>
-                                <p class="name"></p>
-                            </div>
-                        </li>
-                    </template>
                 </ul>
+                <template id="template-li">
+                    <li class="movieLi" >
+                        <div class="link">
+                            <img class="img">
+                            <p class="title"></p>
+                            <p class="name"></p>
+                        </div>
+                    </li>
+                </template>
             </div>
         </div>
         <script type="text/javascript" src="youtube.js"></script>
