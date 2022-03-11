@@ -74,7 +74,8 @@ function onYouTubeIframeAPIReady() {
             end: videoList[videoIndex].end
         },
         events: {
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onReady': htmlVideoList
         }
     });
 }
@@ -106,23 +107,28 @@ function onPlayerStateChange(event){
     }
 }
 
-// htmlの処理
-// ulの取得
-var movieUl = document.getElementById('movie-ul')
-// templateの取得
-var templateLi = document.getElementById('template-li')
-// 曲のリストを表示
-for (var i=0; i<videoList.length; i++){
-    var newMovieLi = templateLi.content.cloneNode(true);
-    // 編集
-    newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-    newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:siteVideo}, false);
-    newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
-    newMovieLi.querySelector('.img').alt = videoList[i]['movie']
-    newMovieLi.querySelector('.title').textContent = videoList[i]['title']
-    newMovieLi.querySelector('.name').textContent = videoList[i]['name']
-    // 追加
-    movieUl.appendChild(newMovieLi);
+// htmlに動画リストを表示
+function htmlVideoList () {
+    // htmlの処理
+    // ulの取得
+    var movieUl = document.getElementById('movie-ul')
+    // templateの取得
+    var templateLi = document.getElementById('template-li')
+    // ulの初期化
+    movieUl.innerHTML = ''
+    // 曲のリストを表示
+    for (var i=0; i<videoList.length; i++){
+        var newMovieLi = templateLi.content.cloneNode(true);
+        // 編集
+        newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
+        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:siteVideo}, false);
+        newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
+        newMovieLi.querySelector('.img').alt = videoList[i]['movie']
+        newMovieLi.querySelector('.title').textContent = videoList[i]['title']
+        newMovieLi.querySelector('.name').textContent = videoList[i]['name']
+        // 追加
+        movieUl.appendChild(newMovieLi);
+    }
 }
 
 // 指定した動画を再生
@@ -146,5 +152,6 @@ function fisherYatesShuffle(arr){
 function videoListShuffle (){
     videoList = fisherYatesShuffle(videoList)
     console.log(videoList)
+    htmlVideoList()
 }
 
