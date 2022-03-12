@@ -191,11 +191,20 @@ function onYouTubeIframeAPIReady() {
 var videoIndex = 0
 
 //https://qiita.com/tkgtamagohan/items/d2e56cbfc8af460c623a
+// 現在の再生状況 1: 再生中  0:停止中
+var playStatus = 0
 //動画再生中はfalse、次の動画の読み込み中にtrue
 var done = false
 // 次の動画の読み込み
 function onPlayerStateChange(event){
-    console.log('onPlayerStateChange:'+event.data)
+    // console.log('onPlayerStateChange : '+event.data)
+    if (event.data==1){
+        document.getElementById('playArrow').src = 'pause_white_24dp.svg'
+        playStatus = 1
+    } else {
+        document.getElementById('playArrow').src = 'play_arrow_white_24dp.svg'
+        playStatus = 0
+    }
     if (event.data==0 && !done){
         videoIndex += 1;
         done = true;
@@ -304,7 +313,11 @@ function changeMute (){
     }
 }
 
-// スタートボタン
-function playArrow (event) {
-    console.log(event.data)
+// 開始停止ボタン
+function playArrow(){
+    if (playStatus == 1){
+        player.pauseVideo()
+    } else if (playStatus == 0) {
+        player.playVideo()
+    }
 }
