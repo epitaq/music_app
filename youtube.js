@@ -177,7 +177,7 @@ function onYouTubeIframeAPIReady() {
             start: videoList[videoIndex].start,
             end: videoList[videoIndex].end,
             fs: 0,
-            controls: 0,
+            controls: 1,
         },
         events: {
             'onStateChange': onPlayerStateChange, 
@@ -299,20 +299,39 @@ function changeRepeat () {
     }
 }
 
+// 最後の音量
+var lastVolume = 100
 // ミュートの判定
 var mute = false
-// 音量
+// ミュート
 function changeMute (){
     mute = !mute
     if (mute){
+        lastVolume = player.getVolume()
+        volume = document.getElementById('volumeSlider').value = 0
         player.mute()
         document.getElementById('volumeButton').src = 'volume_off_white_24dp.svg'
     } else {
         player.unMute()
         document.getElementById('volumeButton').src = 'volume_up_white_24dp.svg'
+        player.setVolume(lastVolume)
+        document.getElementById('volumeSlider').value = lastVolume
     }
 }
-
+// 音量スライダーの変更
+document.getElementById('volumeSlider').addEventListener('input', changeVolume);
+function changeVolume () {
+    var volume = document.getElementById('volumeSlider').value
+    // console.log('changeVolume : ' + volume)
+    if (volume == 0 & !mute){
+        changeMute()
+    } else if (mute){
+        changeMute()
+        player.setVolume(volume)
+    } else {
+        player.setVolume(volume)
+    }
+}
 // 開始停止ボタン
 function playArrow(){
     if (playStatus == 1){
@@ -321,3 +340,4 @@ function playArrow(){
         player.playVideo()
     }
 }
+

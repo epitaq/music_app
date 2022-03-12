@@ -62,8 +62,19 @@ ul {
 .controlChild{
     flex: 1;
     text-align: center;
+    height: 76px;
+    display: flex;
 }
-.buttonIcon{
+/* .buttonIcon{
     width: 32px;
     height: 32px;
+} */
+.buttonIcon{
+    width: 76px;
+    height: 76px;
+    padding: calc(76px - 54px);
+}
+
+.slider{
+    margin: auto 0;
 }
