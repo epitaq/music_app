@@ -176,8 +176,6 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// var sw = window.screen.width; // 画面の横幅
-// var sh = window.screen.height; // 画面の高さ
 
 // 再生する動画のindex
 var videoIndex = 0
