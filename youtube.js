@@ -5,6 +5,14 @@ videoListJson = {
     "content": [
         {
             "id": "bQBHMPmgX8w-9:20",
+            "movie": "none",
+            "name": "ときのそら",
+            "title": "KumoHurray!",
+            "start": 560,
+            "end": 744
+        },
+        {
+            "id": "bQBHMPmgX8w-9:20",
             "movie": "bQBHMPmgX8w",
             "name": "ときのそら",
             "title": "KumoHurray!",
@@ -47,7 +55,7 @@ videoListJson = {
             "id": "Lw3sBpkC3Rw-23:22",
             "movie": "Lw3sBpkC3Rw",
             "name": "ロボ子",
-            "title": "フォイニ",
+            "title": "",
             "start": 1402,
             "end": 1592
         },
@@ -167,7 +175,9 @@ function onYouTubeIframeAPIReady() {
         videoId: videoList[videoIndex].movie,
         playerVars: {
             start: videoList[videoIndex].start,
-            end: videoList[videoIndex].end
+            end: videoList[videoIndex].end,
+            fs: 0,
+            controls: 0,
         },
         events: {
             'onStateChange': onPlayerStateChange,

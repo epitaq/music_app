@@ -4,17 +4,35 @@
         <meta charset="utf-8"/>
         <title>test</title>
         <style>
+            * {
+                margin: 0;
+                box-sizing: border-box;
+            }
+            html, body{
+                overflow: hidden;
+            }
+            body {
+                color:  white;
+            }
+            ul {
+                list-style: none;
+            }
+            .header{
+                height: 32px;
+                text-align: center;
+                background-color: black;
+            }
             .columns{
                 display: flex;
                 width: 100%;
                 height: 100vh;
                 padding: 0 56px;
+                background-color: black;
             }
             .primary{
                 flex: 1;
                 width: 100%;
-                height: 90vh;
-                /* position: relative; */
+                height: calc(100vh - 64px - 32px);
             }
             .player{
                 padding: 16px;
@@ -23,7 +41,7 @@
             .secondary{
                 flex: 1;
                 width: 100%;
-                height: 90vh;
+                height: calc(100vh - 64px - 32px);
                 overflow-y: scroll;
             }
             .movieLi{
@@ -35,24 +53,18 @@
             .titleName{
                 margin-left: 0.5rm;
             }
-            html, body{
-                overflow: hidden;
-                background-color: black;
-            }
-            body {
-                color:  white;
-            }
-            ul {
-                list-style: none;
-            }
-            * {
-                margin: 0;
-                box-sizing: border-box;
+            .control{
+                position: fixed;
+                bottom: 0;
+                height: 64px;
+                width: 100vw;
+                background-color: #002020;
             }
         </style>
     </head>
     <body>
-        <button onclick="videoListShuffle();"></button>
+        <!-- ヘッダー -->
+        <header class="header">music_app</header>
         <!-- 動画と動画再生リスト -->
         <div class="columns">
             <!-- 動画プレイヤー -->
@@ -78,6 +90,9 @@
             </div>
         </div>
         <!-- コントトールパネル -->
+        <div class="control">
+            <button onclick="videoListShuffle();"></button>
+        </div>
         <script type="text/javascript" src="youtube.js"></script>
     </body>
 </html>
