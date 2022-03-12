@@ -180,7 +180,7 @@ function onYouTubeIframeAPIReady() {
             controls: 0,
         },
         events: {
-            'onStateChange': onPlayerStateChange,
+            'onStateChange': onPlayerStateChange, 
             'onReady': htmlVideoList
         }
     });
@@ -195,6 +195,7 @@ var videoIndex = 0
 var done = false
 // 次の動画の読み込み
 function onPlayerStateChange(event){
+    console.log('onPlayerStateChange:'+event.data)
     if (event.data==0 && !done){
         videoIndex += 1;
         done = true;
@@ -301,4 +302,9 @@ function changeMute (){
         player.unMute()
         document.getElementById('volumeButton').src = 'volume_up_white_24dp.svg'
     }
+}
+
+// スタートボタン
+function playArrow (event) {
+    console.log(event.data)
 }
