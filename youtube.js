@@ -199,7 +199,12 @@ function onPlayerStateChange(event){
         videoIndex += 1;
         done = true;
         if (videoIndex > videoList.length-1){
-            videoIndex = 0
+            if (repeat){
+                videoIndex = 0
+                videoListShuffle()
+            } else {
+                return 0
+            }
         }
         player.loadVideoById({
             videoId: videoList[videoIndex].movie,
@@ -269,3 +274,31 @@ function videoListShuffle (){
     htmlVideoList()
 }
 
+
+// ループするのかの指定 true or false
+var repeat = false
+document.getElementById('repeatButton').style.opacity = 0.5;  
+// ループをするしないの反転
+function changeRepeat () {
+    repeat = !repeat
+    console.log(repeat)
+    if (repeat){
+        document.getElementById('repeatButton').style.opacity = 1;  
+    } else {
+        document.getElementById('repeatButton').style.opacity = 0.5;  
+    }
+}
+
+// ミュートの判定
+var mute = false
+// 音量
+function changeMute (){
+    mute = !mute
+    if (mute){
+        player.mute()
+        document.getElementById('volumeButton').src = 'volume_off_white_24dp.svg'
+    } else {
+        player.unMute()
+        document.getElementById('volumeButton').src = 'volume_up_white_24dp.svg'
+    }
+}
