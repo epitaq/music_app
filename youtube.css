@@ -63,7 +63,10 @@ ul {
     flex: 1;
     text-align: center;
     height: 76px;
+    width: 100%;
     display: flex;
+    /* border: solid;
+    border-color: #009090; */
 }
 /* .buttonIcon{
     width: 32px;
@@ -74,7 +77,6 @@ ul {
     height: 76px;
     padding: calc(76px - 54px);
 }
-
 .slider{
     margin: auto 0;
 }

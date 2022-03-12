@@ -177,11 +177,12 @@ function onYouTubeIframeAPIReady() {
             start: videoList[videoIndex].start,
             end: videoList[videoIndex].end,
             fs: 0,
-            controls: 1,
+            controls: 0,
         },
         events: {
-            'onStateChange': onPlayerStateChange, 
-            'onReady': htmlVideoList
+            onStateChange: onPlayerStateChange, 
+            onReady: htmlVideoList,
+            onError: skipVideo,
         }
     });
 }
@@ -216,11 +217,7 @@ function onPlayerStateChange(event){
                 return 0
             }
         }
-        player.loadVideoById({
-            videoId: videoList[videoIndex].movie,
-            startSeconds:  videoList[videoIndex].start,
-            endSeconds: videoList[videoIndex].end
-        });
+        specifiedVideos(videoIndex)
     } else if (event.data == 1 && done){
         done = false;
     }
@@ -240,7 +237,7 @@ function htmlVideoList () {
         var newMovieLi = templateLi.content.cloneNode(true);
         // 編集
         newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:siteVideo}, false);
+        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:specifiedVideosOnlyHtmlVideoList}, false);
         newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
         newMovieLi.querySelector('.img').alt = videoList[i]['movie']
         newMovieLi.querySelector('.title').textContent = videoList[i]['title']
@@ -250,13 +247,20 @@ function htmlVideoList () {
     }
 }
 
-// 指定した動画を再生
-function siteVideo (num) {
+// 指定した動画を再生 htmlVideoList用
+function specifiedVideosOnlyHtmlVideoList () {
     videoIndex = this.index
-    player.loadVideoById({videoId:videoList[videoIndex].movie,
-        startSeconds:videoList[videoIndex].start,
-        endSeconds:videoList[videoIndex].end,
+    specifiedVideos(videoIndex)
+}
+// 指定した動画を再生 引数あり
+function specifiedVideos (num) {
+    information ()
+    player.loadVideoById({
+        videoId:videoList[num].movie,
+        startSeconds:videoList[num].start,
+        endSeconds:videoList[num].end,
     })
+    document.title = videoList[videoIndex]['title']
 }
 
 // シャッフル用
@@ -340,4 +344,29 @@ function playArrow(){
         player.playVideo()
     }
 }
+// スキップボタン
+function skipVideo () {
+    videoIndex ++
+    specifiedVideos(videoIndex)
+}
+// 戻るボタン
+function restoreVideo () {
+    videoIndex --
+    specifiedVideos(videoIndex)
+}
 
+// アイコン＆titleの表示
+function information () {
+    var info = document.getElementById('information')
+    info.innerHTML = ''
+    var template = document.getElementById('templateInfo')
+    var newInfo = template.content.cloneNode(true);
+        // 編集
+    // newInfo.querySelector('.videoInfo').id = videoList[videoIndex]['id']
+    newInfo.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[videoIndex]['movie'] + '/default.jpg'
+    newInfo.querySelector('.img').alt = videoList[videoIndex]['movie']
+    newInfo.querySelector('.title').textContent = videoList[videoIndex]['title']
+    newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
+    // 追加
+    info.appendChild(newInfo);
+}

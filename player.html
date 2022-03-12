@@ -2,7 +2,7 @@
 <html >
     <head>
         <meta charset="utf-8"/>
-        <title>test</title>
+        <title>music_app</title>
         <link rel="stylesheet" href="youtube.css">
     </head>
     <body>
@@ -36,12 +36,24 @@
         <div class="control">
             <!-- 再生＆時間 -->
             <div class="controlChild">
-                <img src="skip_previous_white_24dp.svg" class="buttonIcon">
+                <img src="skip_previous_white_24dp.svg" onclick="restoreVideo()" class="buttonIcon">
                 <img src="play_arrow_white_24dp.svg" id="playArrow" onclick="playArrow()" class="buttonIcon">
-                <img src="skip_next_white_24dp.svg" class="buttonIcon">
+                <img src="skip_next_white_24dp.svg" onclick="skipVideo()" class="buttonIcon">
             </div>
             <!-- タイトル -->
-            <div class="controlChild">test</div>
+            <div class="controlChild" id="information"></div>
+            <!-- テンプレート -->
+            <template id="templateInfo">
+                <div class="videoInof" >
+                    <div class="link">
+                        <img class="img">
+                        <div class="titleName">
+                            <h2 class="title"></h2>
+                            <span class="name"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
             <!-- レピート＆シャッフル -->
             <div class="controlChild">
                 <div class="slider">
