@@ -1,6 +1,7 @@
+# 分を秒に変換
 import csv
 
-csv_name = 'html/videoList3のコピー.csv'
+csv_name = input()
 music_list = []
 with open(csv_name, 'r') as f:
     data = csv.reader(f)
