@@ -86,9 +86,7 @@ ul {
     margin: auto 0;
 }
 .volumeRepeatShuffle{
-    margin-right: auto;
     display: flex;
-    text-align: right;
 }
 /* .control2{
     
