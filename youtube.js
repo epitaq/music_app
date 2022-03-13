@@ -363,8 +363,8 @@ function information () {
     var newInfo = template.content.cloneNode(true);
         // 編集
     // newInfo.querySelector('.videoInfo').id = videoList[videoIndex]['id']
-    newInfo.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[videoIndex]['movie'] + '/default.jpg'
-    newInfo.querySelector('.img').alt = videoList[videoIndex]['movie']
+    // newInfo.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[videoIndex]['movie'] + '/default.jpg'
+    // newInfo.querySelector('.img').alt = videoList[videoIndex]['movie']
     newInfo.querySelector('.title').textContent = videoList[videoIndex]['title']
     newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
     // 追加
