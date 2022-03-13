@@ -44,24 +44,24 @@
             <div class="controlChild" id="information"></div>
             <!-- テンプレート -->
             <template id="templateInfo">
-                <div class="videoInof" >
-                    <div class="link">
-                        <img class="img">
-                        <div class="titleName">
-                            <h2 class="title"></h2>
-                            <span class="name"></span>
-                        </div>
+                <div class="videoInfo" >
+                    <img class="img infoImg">
+                    <div class="titleNameInfo">
+                        <h1 class="title"></h1>
+                        <span class="name"></span>
                     </div>
                 </div>
             </template>
             <!-- レピート＆シャッフル -->
-            <div class="controlChild">
-                <div class="slider">
+            <div class="controlChild volumeRepeatShuffle">
+                <div class="slider control2">
                     <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" >
                 </div>
-                <img src="volume_up_white_24dp.svg" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
-                <img src="repeat_white_24dp.svg" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
-                <img src="shuffle_white_24dp.svg" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon"> 
+                <div class="control2">
+                    <img src="volume_up_white_24dp.svg" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
+                    <img src="repeat_white_24dp.svg" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
+                    <img src="shuffle_white_24dp.svg" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon">
+                </div> 
             </div>
         </div>
         <script type="text/javascript" src="youtube.js"></script>

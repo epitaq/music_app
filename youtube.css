@@ -42,7 +42,7 @@ ul {
     margin-top: 0.1rem;
 }
 .img{
-    height: 64px;
+    height: 60px;
 }
 .link{
     display: flex;
@@ -63,20 +63,33 @@ ul {
     flex: 1;
     text-align: center;
     height: 76px;
-    width: 100%;
-    display: flex;
-    /* border: solid;
-    border-color: #009090; */
+    /* width: 100%; */
 }
-/* .buttonIcon{
-    width: 32px;
-    height: 32px;
-} */
 .buttonIcon{
     width: 76px;
     height: 76px;
     padding: calc(76px - 54px);
 }
+
+.videoInfo{
+    display: flex;
+    width: 100%;
+}
+.infoImg{
+    left: 0px;
+    margin-right: -80px;
+}
+.titleNameInfo{
+    margin: auto;
+}
 .slider{
     margin: auto 0;
 }
+.volumeRepeatShuffle{
+    margin-right: auto;
+    display: flex;
+    text-align: right;
+}
+/* .control2{
+    
+} */
