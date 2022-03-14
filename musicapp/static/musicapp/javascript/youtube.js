@@ -233,7 +233,7 @@ function htmlVideoList () {
     // ulの初期化
     movieUl.innerHTML = ''
     // 曲のリストを表示
-    for (var i=0; i<videoList.length; i++){
+    for (var i=0; i<videoList.length; i+= 1){
         var newMovieLi = templateLi.content.cloneNode(true);
         // 編集
         newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
@@ -267,7 +267,7 @@ function specifiedVideos (num) {
 
 // シャッフル用
 function fisherYatesShuffle(arr){
-    for(var i =arr.length-1 ; i>0 ;i--){
+    for(var i =arr.length-1 ; i>0 ;i-= 1){
         var j = Math.floor( Math.random() * (i + 1) ); //random index
         [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
     }
@@ -277,7 +277,7 @@ function fisherYatesShuffle(arr){
 function videoListShuffle (){
     var nowVideoId = videoList[videoIndex].id
     videoList = fisherYatesShuffle(videoList)
-    for (var i=0; i<videoList.length; i++){
+    for (var i=0; i<videoList.length; i+= 1){
         if (videoList[i].id == nowVideoId) {
             videoIndex = i
             if (videoIndex > videoList.length-1){
@@ -348,12 +348,12 @@ function playArrow(){
 }
 // スキップボタン
 function skipVideo () {
-    videoIndex ++
+    videoIndex += 1
     specifiedVideos(videoIndex)
 }
 // 戻るボタン
 function restoreVideo () {
-    videoIndex --
+    videoIndex -= 1
     specifiedVideos(videoIndex)
 }
 
