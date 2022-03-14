@@ -150,15 +150,13 @@ DATABASES['default'].update(db_from_env)
 
 # settingsファイルのパスが入る
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # manage.pyのcollectstaticをした時に、静的ファイルがどこに格納されるか指定する
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 # HerokuやWebサーバーに静的ファイルを見に行く場所を指定する
 STATIC_URL = '/static/'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 GOOGLE_ANALYTICS_TRACKING_ID = 'G-64BZ6JFGDX'
