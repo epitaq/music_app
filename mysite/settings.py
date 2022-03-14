@@ -127,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -147,6 +147,21 @@ if not DEBUG:
 db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(db_from_env)
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# settingsファイルのパスが入る
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# manage.pyのcollectstaticをした時に、静的ファイルがどこに格納されるか指定する
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# HerokuやWebサーバーに静的ファイルを見に行く場所を指定する
+STATIC_URL = '/static/'
+
+# 各アプリケーションのstatic以外に配信するディレクトリがある場合に追加
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, '..', 'django_app_name', 'static'),
+# )
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 
 GOOGLE_ANALYTICS_TRACKING_ID = 'G-64BZ6JFGDX'
