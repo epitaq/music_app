@@ -6,6 +6,9 @@
         <meta http-equiv="content-language" content="ja">
         <title>music_app</title>
         <link rel="stylesheet" href="{% static 'musicapp/css/style.css' %}">
+        {% if GOOGLE_ANALYTICS_TRACKING_ID %}
+            {% include 'ga.html' %}
+        {% endif %}
     </head>
     <body>
         <header class="header">music_app</header>
@@ -18,7 +21,7 @@
             <!-- 動画の再生リスト -->
             <div class="secondary columnsChild">
                 <!-- 検索欄 -->
-                <div class="search">test</div>
+                <!-- <div class="search">test</div> -->
                 <!-- 再生リスト -->
                 <div class="music-list">
                     <ul id="movie-ul"></ul>
