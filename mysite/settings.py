@@ -157,10 +157,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # HerokuやWebサーバーに静的ファイルを見に行く場所を指定する
 STATIC_URL = '/static/'
 
-# 各アプリケーションのstatic以外に配信するディレクトリがある場合に追加
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, '..', 'django_app_name', 'static'),
-# )
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
