@@ -7,7 +7,7 @@ videoListJson = {
             "id": "bQBHMPmgX8w-9:20",
             "movie": "none",
             "name": "ときのそら",
-            "title": "KumoHurray!",
+            "title": "none",
             "start": 560,
             "end": 744
         },

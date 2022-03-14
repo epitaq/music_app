@@ -1,43 +1,43 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="ja">
+{% load static %}
+<html lang="ja"> 
     <head>
-        <meta charset="utf-8"/>
+        <meta charset="utf-8">
         <meta http-equiv="content-language" content="ja">
         <title>music_app</title>
         <link rel="stylesheet" href="{% static 'musicapp/css/style.css' %}">
-        <!-- musicapp/images -->
     </head>
     <body>
-        <!-- ヘッダー -->
         <header class="header">music_app</header>
         <!-- 動画と動画再生リスト -->
         <div class="columns">
-            <!-- 動画プレイヤー -->
-            <div class="primary">
+            <!-- プレイヤー -->
+            <div class="primary columnsChild">
                 <div id="player" class="player"></div>
             </div>
-            <!-- 動画再生リスト -->
-            <div class="secondary">
-                <ul id="movie-ul">
-                </ul>
-                <!-- テンプレート -->
-                <template id="template-li">
-                    <li class="movieLi" >
-                        <div class="link">
-                            <img class="img">
-                            <div class="titleName">
-                                <h2 class="title"></h2>
-                                <span class="name"></span>
+            <!-- 動画の再生リスト -->
+            <div class="secondary columnsChild">
+                <!-- 検索欄 -->
+                <div class="search">test</div>
+                <!-- 再生リスト -->
+                <div class="music-list">
+                    <ul id="movie-ul"></ul>
+                    <template id="template-li">
+                        <li class="movieLi" >
+                            <div class="link">
+                                <img class="img">
+                                <div class="titleName">
+                                    <h2 class="title"></h2>
+                                    <span class="name"></span>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </template>
+                        </li>
+                    </template>
+                </div>
             </div>
         </div>
         <!-- コントトールパネル -->
         <div class="control">
-            <!-- 再生＆時間 -->
             <div class="controlChild">
                 <img src="{% static 'musicapp/images/skip_previous_white_24dp.svg' %}" onclick="restoreVideo()" class="buttonIcon">
                 <img src="{% static 'musicapp/images/play_arrow_white_24dp.svg' %}" id="playArrow" onclick="playArrow()" class="buttonIcon">
