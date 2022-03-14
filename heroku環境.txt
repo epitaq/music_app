@@ -1,1 +1,6 @@
 https://qiita.com/frosty/items/66f5dff8fc723387108c
+
+これのせい？
+https://qiita.com/watchmen-r/items/8e5e9ed1980556e453b0
+'whitenoise.middleware.WhiteNoiseMiddleware'の場所が大切？？？？
+あーーーーーーー
