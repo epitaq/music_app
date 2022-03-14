@@ -245,6 +245,8 @@ function htmlVideoList () {
         // 追加
         movieUl.appendChild(newMovieLi);
     }
+    // コントロール中央に情報を表示
+    information()
 }
 
 // 指定した動画を再生 htmlVideoList用
@@ -361,10 +363,7 @@ function information () {
     info.innerHTML = ''
     var template = document.getElementById('templateInfo')
     var newInfo = template.content.cloneNode(true);
-        // 編集
-    // newInfo.querySelector('.videoInfo').id = videoList[videoIndex]['id']
-    // newInfo.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[videoIndex]['movie'] + '/default.jpg'
-    // newInfo.querySelector('.img').alt = videoList[videoIndex]['movie']
+    // 編集
     newInfo.querySelector('.title').textContent = videoList[videoIndex]['title']
     newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
     // 追加
