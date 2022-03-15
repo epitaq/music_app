@@ -163,7 +163,15 @@ function changeRepeat () {
 }
 
 // 最後の音量
-var lastVolume = 100
+// クッキーから取得
+if (document.cookie.split('=')[0] = 'volume'){
+    var lastVolume = document.cookie.split('=')[1]-0
+    document.getElementById('volumeSlider').value = lastVolume
+} else {
+    var lastVolume = 100
+}
+setTimeout(function(){player.setVolume(lastVolume)}, 1000)
+// player.setVolume(volume)
 // ミュートの判定
 var mute = false
 // ミュート
@@ -194,6 +202,8 @@ function changeVolume () {
     } else {
         player.setVolume(volume)
     }
+    // 音量をクッキーに保存 10min
+    document.cookie = "volume=" + volume + ";max-age=10"
 }
 // 開始停止ボタン
 function playArrow(){
