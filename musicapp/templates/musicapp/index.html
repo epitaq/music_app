@@ -67,6 +67,7 @@
                 </div> 
             </div>
         </div>
+        {{ data|json_script:"musicData" }}
         <script type="text/javascript" src="{% static 'musicapp/javascript/youtube.js' %}"></script>
     </body>
 </html>
