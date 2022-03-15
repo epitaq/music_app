@@ -7,32 +7,15 @@ from musicapp.models import MusicList
 
 def index(request):
     template = loader.get_template('musicapp/index.html')
-    music_data1 = [
-        {
-            "id": "bQBHMPmgX8w-9:20",
-            "movie": "bQBHMPmgX8w",
-            "name": "ときのそら",
-            "title": "KumoHurray!",
-            "start": 560,
-            "end": 744
-        },
-        {
-            "id": "bQBHMPmgX8w-53:46",
-            "movie": "bQBHMPmgX8w",
-            "name": "ときのそら",
-            "title": "花時の空",
-            "start": 3226,
-            "end": 3563
-        },
-        {
-            "id": "3YfI8tPsfS4-12:02",
-            "movie": "3YfI8tPsfS4",
-            "name": "ときのそら",
-            "title": "Step and Go!!",
-            "start": 722,
-            "end": 980
-        },]
-    music_data = list(MusicList.objects.all().values())
+
+    music_list = MusicList.objects
+    #getの確認＋dbを叩く
+    if 'name' in request.GET:
+        music_list = music_list.filter(name=request.GET['name'])
+    if 'title' in request.GET:
+        music_list = music_list.filter(title=request.GET['title'])
+    #dataを渡す
+    music_data = list(music_list.values())
     context = {
         "data": music_data
     }
