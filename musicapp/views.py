@@ -36,6 +36,6 @@ def index(request):
             ]
         }
     context = {
-        'musicData': json.dumps(music_data , ensure_ascii=False)
+        "data": json.dumps(music_data , ensure_ascii=False)
     }
     return HttpResponse(template.render(context, request))
