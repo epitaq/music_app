@@ -7,3 +7,7 @@ https://qiita.com/watchmen-r/items/8e5e9ed1980556e453b0
 違った
 プロジェクトのみをgitにあげないといけなかった
 今まではプロジェクトの一個うえをgitにあげてた
+
+ーーー
+jsonの送信
+https://github.com/returntocorp/semgrep-rules/issues/240
