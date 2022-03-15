@@ -1,13 +1,13 @@
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import MusicList
+from musicapp.models import MusicList
 
 
 
 def index(request):
     template = loader.get_template('musicapp/index.html')
-    music_data = [
+    music_data1 = [
         {
             "id": "bQBHMPmgX8w-9:20",
             "movie": "bQBHMPmgX8w",
@@ -32,7 +32,7 @@ def index(request):
             "start": 722,
             "end": 980
         },]
-    #music_data = [MusicList.objects.all().values()]
+    music_data = list(MusicList.objects.all().values())
     context = {
         "data": music_data
     }
