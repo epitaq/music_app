@@ -3,6 +3,20 @@
 // json
 videoList = JSON.parse(document.getElementById('data').textContent)
 
+// もし一個も見つからなかったら
+if (videoList.length == 0){
+    videoList = [
+        {
+            "id": "none",
+            "movie": "none",
+            "name": "epita",
+            "title": "見つかりません",
+            "start": 0,
+            "end": 0
+        },
+    ]
+}
+
 // youtube iframe api の読み込み
 var tag = document.createElement('script');
 
