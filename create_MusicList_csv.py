@@ -1,6 +1,6 @@
 # 分を秒に変換
 import csv
-
+print('csvのpathを入力')
 csv_name = input()
 music_list = []
 with open(csv_name, 'r') as f:

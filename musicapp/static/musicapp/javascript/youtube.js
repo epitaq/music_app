@@ -136,7 +136,7 @@ function videoListShuffle (){
 
 // ループするのかの指定 true or false
 var repeat = true
-document.getElementById('repeatButton').style.opacity = 0.5;  
+// document.getElementById('repeatButton').style.opacity = 0.5;  
 // ループをするしないの反転
 function changeRepeat () {
     repeat = !repeat
