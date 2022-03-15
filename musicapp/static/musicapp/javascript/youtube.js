@@ -203,7 +203,7 @@ function changeVolume () {
         player.setVolume(volume)
     }
     // 音量をクッキーに保存 10min
-    document.cookie = "volume=" + volume + ";max-age=10"
+    document.cookie = "volume=" + volume + ";max-age=600"
 }
 // 開始停止ボタン
 function playArrow(){
