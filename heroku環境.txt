@@ -11,3 +11,9 @@ https://qiita.com/watchmen-r/items/8e5e9ed1980556e453b0
 ーーー
 jsonの送信
 https://github.com/returntocorp/semgrep-rules/issues/240
+
+---
+dbの更新
+heroku run python manage.py migrate
+これが必要
+それ以外もいるかも？

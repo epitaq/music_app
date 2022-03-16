@@ -40,7 +40,7 @@ ul {
 }
 .music-list{
     overflow-y: scroll;
-    height: calc(100% - 20px - 76px);
+    height: calc(100% - 20px);
     margin: 10px 0;
 }
 .movieLi{

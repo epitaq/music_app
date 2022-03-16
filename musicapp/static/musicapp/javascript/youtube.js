@@ -34,7 +34,7 @@ function onYouTubeIframeAPIReady() {
             start: videoList[videoIndex].start,
             end: videoList[videoIndex].end,
             fs: 0,
-            controls: 1,
+            controls: 0,
         },
         events: {
             onStateChange: onPlayerStateChange, 
@@ -256,11 +256,7 @@ function information () {
 }
 
 // 画質の変更
-document.getElementById('quality').addEventListener('change', changeQuality)
-function changeQuality () {
-    var quality = document.getElementById('quality').value
-    player.setPlaybackQuality(suggestedQuality=quality)
-}
+// できなかった
 // 再生速度
 document.getElementById('PlaybackRate').addEventListener('change', changePlaybackRate)
 function changePlaybackRate () {
