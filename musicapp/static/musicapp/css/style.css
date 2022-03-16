@@ -74,6 +74,7 @@ ul {
     right: 0;
     transform: translateY(-50%);
     height: 3px;
+    width: 100%;
 }
 .buttonIcon{
     width: 76px;
