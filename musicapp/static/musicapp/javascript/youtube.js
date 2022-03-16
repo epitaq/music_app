@@ -190,11 +190,9 @@ var lastVolume = 100
 // クッキーから取得
 var cook = document.cookie.split(';')
 for (var i=0; i<cook.length;i++){
-    console.log(cook[i].split('=')[0])
     if (cook[i].split('=')[0] == ' volume'){
         var lastVolume = cook[i].split('=')[1]
         document.getElementById('volumeSlider').value = lastVolume
-        console.log(lastVolume)
     }
 }
 setTimeout(function(){player.setVolume(lastVolume)}, 1000)
