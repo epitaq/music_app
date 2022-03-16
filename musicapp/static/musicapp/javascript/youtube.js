@@ -64,7 +64,7 @@ function onPlayerStateChange(event){
     if (event.data==0 && !done){
         videoIndex += 1;
         done = true;
-        if (videoIndex > videoList.length-1){
+        if (videoIndex >= videoList.length){
             if (repeat){
                 videoIndex = 0
                 videoListShuffle()
@@ -255,25 +255,23 @@ function fisherYatesShuffle(arr){
 }
 // videoList をシャッフル
 function videoListShuffle (){
-    var nowVideoId = videoList[videoIndex].id
     videoList = fisherYatesShuffle(videoList)
-    for (var i=0; i<videoList.length; i+= 1){
-        if (videoList[i].id == nowVideoId) {
-            videoIndex = i
-            if (videoIndex > videoList.length-1){
-                videoIndex = 0
-            }
-            // console.log(videoIndex)
-        }
+    videoIndex = 0
+    // 動画を更新
+    if (playStatus == 1){
+        specifiedVideos(videoIndex)
+    } else {
+        specifiedVideos(videoIndex)
+        setTimeout(function(){player.pauseVideo()},300)
     }
-    // console.log(videoList)
+    // htmlを変更
     htmlVideoList()
 }
 
 
 // 再生速度
-document.getElementById('PlaybackRate').addEventListener('change', changePlaybackRate)
-function changePlaybackRate () {
-    var playbackRate = document.getElementById('PlaybackRate').value - 0
-    player.setPlaybackRate(suggestedRate=playbackRate)
-}
+// document.getElementById('PlaybackRate').addEventListener('change', changePlaybackRate)
+// function changePlaybackRate () {
+//     var playbackRate = document.getElementById('PlaybackRate').value - 0
+//     player.setPlaybackRate(suggestedRate=playbackRate)
+// }
