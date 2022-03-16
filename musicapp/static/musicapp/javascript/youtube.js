@@ -186,12 +186,16 @@ function information () {
 
 
 // 最後の音量
+var lastVolume = 100
 // クッキーから取得
-if (document.cookie.split('=')[0] == 'volume'){
-    var lastVolume = document.cookie.split('=')[1]-0
-    document.getElementById('volumeSlider').value = lastVolume
-} else {
-    var lastVolume = 100
+var cook = document.cookie.split(';')
+for (var i=0; i<cook.length;i++){
+    console.log(cook[i].split('=')[0])
+    if (cook[i].split('=')[0] == ' volume'){
+        var lastVolume = cook[i].split('=')[1]
+        document.getElementById('volumeSlider').value = lastVolume
+        console.log(lastVolume)
+    }
 }
 setTimeout(function(){player.setVolume(lastVolume)}, 1000)
 // player.setVolume(volume)
@@ -269,9 +273,3 @@ function videoListShuffle (){
 }
 
 
-// 再生速度
-// document.getElementById('PlaybackRate').addEventListener('change', changePlaybackRate)
-// function changePlaybackRate () {
-//     var playbackRate = document.getElementById('PlaybackRate').value - 0
-//     player.setPlaybackRate(suggestedRate=playbackRate)
-// }
