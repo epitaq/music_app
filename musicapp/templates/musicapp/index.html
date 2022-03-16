@@ -42,6 +42,8 @@
         <!-- コントトールパネル -->
         <div class="control">
             <div class="controlChild">
+                <!-- 時間管理のスライダー -->
+                <input type="range" min="0" max="1" step="0.001" value="0" id="timeSlider" class="timeSlider" >
                 <img src="{% static 'musicapp/images/skip_previous_white_24dp.svg' %}" onclick="restoreVideo()" class="buttonIcon">
                 <img src="{% static 'musicapp/images/play_arrow_white_24dp.svg' %}" id="playArrow" onclick="playArrow()" class="buttonIcon">
                 <img src="{% static 'musicapp/images/skip_next_white_24dp.svg' %}" onclick="skipVideo()" class="buttonIcon">

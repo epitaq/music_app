@@ -67,6 +67,13 @@ ul {
     height: 76px;
     /* width: 100%; */
 }
+.timeSlider{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
 .buttonIcon{
     width: 76px;
     height: 76px;

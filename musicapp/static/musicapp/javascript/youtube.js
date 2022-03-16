@@ -57,8 +57,10 @@ var done = false
 function onPlayerStateChange(event){
     // console.log('onPlayerStateChange : '+event.data)
     if (event.data==1){
-        document.getElementById('playArrow').src = '/static/musicapp/images/pause_white_24dp.svg' //"{% static 'musicapp/images/pause_white_24dp.svg' %}" 'static/musicapp/images/pause_white_24dp.svg'
+        document.getElementById('playArrow').src = '/static/musicapp/images/pause_white_24dp.svg'
         playStatus = 1
+        // 時間管理スライダーを移動
+        changeTimeSlider()
     } else {
         document.getElementById('playArrow').src = '/static/musicapp/images/play_arrow_white_24dp.svg'
         playStatus = 0
@@ -94,7 +96,7 @@ function htmlVideoList () {
         var newMovieLi = templateLi.content.cloneNode(true);
         // 編集
         newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:specifiedVideosOnlyHtmlVideoList}, false);
+        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:function(){videoIndex = this.index;specifiedVideos(videoIndex)}}, false);
         newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
         newMovieLi.querySelector('.img').alt = videoList[i]['movie']
         newMovieLi.querySelector('.title').textContent = videoList[i]['title']
@@ -106,20 +108,18 @@ function htmlVideoList () {
     information()
 }
 
-// 指定した動画を再生 htmlVideoList用
-function specifiedVideosOnlyHtmlVideoList () {
-    videoIndex = this.index
-    specifiedVideos(videoIndex)
-}
-// 指定した動画を再生 引数あり
+// 指定した動画を再生
 function specifiedVideos (num) {
+    // コントロール中央を表示
     information ()
+    // 時間スライダーを0
+    document.getElementById('timeSlider').value = 0
+    // 動画をロード
     player.loadVideoById({
         videoId:videoList[num].movie,
         startSeconds:videoList[num].start,
         endSeconds:videoList[num].end,
     })
-    document.title = videoList[videoIndex]['title']
 }
 
 // シャッフル用
@@ -140,7 +140,7 @@ function videoListShuffle (){
             if (videoIndex > videoList.length-1){
                 videoIndex = 0
             }
-            console.log(videoIndex)
+            // console.log(videoIndex)
         }
     }
     // console.log(videoList)
@@ -164,7 +164,7 @@ function changeRepeat () {
 
 // 最後の音量
 // クッキーから取得
-if (document.cookie.split('=')[0] = 'volume'){
+if (document.cookie.split('=')[0] == 'volume'){
     var lastVolume = document.cookie.split('=')[1]-0
     document.getElementById('volumeSlider').value = lastVolume
 } else {
@@ -203,8 +203,24 @@ function changeVolume () {
         player.setVolume(volume)
     }
     // 音量をクッキーに保存 10min
-    document.cookie = "volume=" + volume + ";max-age=600"
+    document.cookie = "volume=" + volume + ";max-age=86400"
 }
+
+// 時間管理のスライダー 指定時間に飛ぶ
+document.getElementById('timeSlider').addEventListener('input', changeTime);
+function changeTime () {
+    var nowTime = document.getElementById('timeSlider').value
+    seekTime = (videoList[videoIndex].end - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
+    player.seekTo(seekTime, allowSeekAhead=true)
+}
+// 時間管理スライダーを変更
+function changeTimeSlider() {
+    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoList[videoIndex].end - videoList[videoIndex].start)
+    // console.log(nowTime)
+    document.getElementById('timeSlider').value = nowTime
+    setTimeout(changeTimeSlider, 100)
+}
+
 // 開始停止ボタン
 function playArrow(){
     if (playStatus == 1){
@@ -235,4 +251,6 @@ function information () {
     newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
     // 追加
     info.appendChild(newInfo);
+    // タイトルの変更
+    document.title = videoList[videoIndex]['title']
 }
