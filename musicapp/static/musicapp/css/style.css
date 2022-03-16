@@ -31,9 +31,12 @@ ul {
     height: 100%;
 }
 /* .secondary{} */
-.search{
+.setting{
     height: 76px;
-    background-color: aqua;
+    /* background-color: aqua; */
+}
+.setting1{
+    display: flex;
 }
 .music-list{
     overflow-y: scroll;

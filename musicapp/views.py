@@ -7,7 +7,6 @@ from musicapp.models import MusicList
 
 def index(request):
     template = loader.get_template('musicapp/index.html')
-
     music_list = MusicList.objects
     #getの確認＋dbを叩く
     # 部分的な一致を検索
