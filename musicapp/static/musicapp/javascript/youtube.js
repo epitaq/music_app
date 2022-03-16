@@ -1,8 +1,5 @@
-// youtube2をリニューアル
-// 直接画像のパスを指定したら変更可能:django
-// json
+// Djangoからdataを取得
 videoList = JSON.parse(document.getElementById('data').textContent)
-
 // もし一個も見つからなかったら
 if (videoList.length == 0){
     videoList = [
@@ -17,13 +14,12 @@ if (videoList.length == 0){
     ]
 }
 
-// youtube iframe api の読み込み
-var tag = document.createElement('script');
 
+// youtube iframe api
+var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
@@ -53,7 +49,7 @@ var videoIndex = 0
 var playStatus = 0
 //動画再生中はfalse、次の動画の読み込み中にtrue
 var done = false
-// 次の動画の読み込み
+// 次の動画の読み込み、再生ステータスの変更で矢印マークの変更
 function onPlayerStateChange(event){
     // console.log('onPlayerStateChange : '+event.data)
     if (event.data==1){
@@ -82,6 +78,22 @@ function onPlayerStateChange(event){
     }
 }
 
+
+// 指定した動画を再生
+function specifiedVideos (num) {
+    // コントロール中央を表示
+    information ()
+    // 時間スライダーを0
+    document.getElementById('timeSlider').value = 0
+    // 動画をロード
+    player.loadVideoById({
+        videoId:videoList[num].movie,
+        startSeconds:videoList[num].start,
+        endSeconds:videoList[num].end,
+    })
+}
+
+
 // htmlに動画リストを表示
 function htmlVideoList () {
     // htmlの処理
@@ -108,59 +120,70 @@ function htmlVideoList () {
     information()
 }
 
-// 指定した動画を再生
-function specifiedVideos (num) {
-    // コントロール中央を表示
-    information ()
-    // 時間スライダーを0
-    document.getElementById('timeSlider').value = 0
-    // 動画をロード
-    player.loadVideoById({
-        videoId:videoList[num].movie,
-        startSeconds:videoList[num].start,
-        endSeconds:videoList[num].end,
-    })
+
+// 時間管理のスライダー 指定時間に飛ぶ
+document.getElementById('timeSlider').addEventListener('input', changeTime);
+function changeTime () {
+    var nowTime = document.getElementById('timeSlider').value
+    seekTime = (videoList[videoIndex].end - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
+    player.seekTo(seekTime, allowSeekAhead=true)
+}
+// 時間管理スライダーを変更
+function changeTimeSlider() {
+    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoList[videoIndex].end - videoList[videoIndex].start)
+    // console.log(nowTime)
+    document.getElementById('timeSlider').value = nowTime
+    setTimeout(changeTimeSlider, 100)
 }
 
-// シャッフル用
-function fisherYatesShuffle(arr){
-    for(var i =arr.length-1 ; i>0 ;i-= 1){
-        var j = Math.floor( Math.random() * (i + 1) ); //random index
-        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+
+// 開始停止ボタン
+function playArrow(){
+    if (playStatus == 1){
+        player.pauseVideo()
+    } else if (playStatus == 0) {
+        player.playVideo()
     }
-    return arr
 }
-// videoList をシャッフル
-function videoListShuffle (){
-    var nowVideoId = videoList[videoIndex].id
-    videoList = fisherYatesShuffle(videoList)
-    for (var i=0; i<videoList.length; i+= 1){
-        if (videoList[i].id == nowVideoId) {
-            videoIndex = i
-            if (videoIndex > videoList.length-1){
-                videoIndex = 0
-            }
-            // console.log(videoIndex)
-        }
-    }
-    // console.log(videoList)
-    htmlVideoList()
-}
-
-
-// ループするのかの指定 true or false
-var repeat = true
-// document.getElementById('repeatButton').style.opacity = 0.5;  
-// ループをするしないの反転
-function changeRepeat () {
-    repeat = !repeat
-    console.log(repeat)
-    if (repeat){
-        document.getElementById('repeatButton').style.opacity = 1;  
+// スキップボタン
+function skipVideo () {
+    if (playStatus == 1){
+        videoIndex += 1
+        specifiedVideos(videoIndex)
     } else {
-        document.getElementById('repeatButton').style.opacity = 0.5;  
+        videoIndex += 1
+        specifiedVideos(videoIndex)
+        setTimeout(function(){player.pauseVideo()},300)
     }
 }
+// 戻るボタン
+function restoreVideo () {
+    if (playStatus == 1){
+        videoIndex -= 1
+        specifiedVideos(videoIndex)
+    } else {
+        videoIndex -= 1
+        specifiedVideos(videoIndex)
+        setTimeout(function(){player.pauseVideo()},300)
+    }
+}
+
+
+// 動画タイトルの表示、コントロール
+function information () {
+    var info = document.getElementById('information')
+    info.innerHTML = ''
+    var template = document.getElementById('templateInfo')
+    var newInfo = template.content.cloneNode(true);
+    // 編集
+    newInfo.querySelector('.title').textContent = videoList[videoIndex]['title']
+    newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
+    // 追加
+    info.appendChild(newInfo);
+    // タイトルの変更
+    document.title = videoList[videoIndex]['title']
+}
+
 
 // 最後の音量
 // クッキーから取得
@@ -206,57 +229,48 @@ function changeVolume () {
     document.cookie = "volume=" + volume + ";max-age=86400"
 }
 
-// 時間管理のスライダー 指定時間に飛ぶ
-document.getElementById('timeSlider').addEventListener('input', changeTime);
-function changeTime () {
-    var nowTime = document.getElementById('timeSlider').value
-    seekTime = (videoList[videoIndex].end - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
-    player.seekTo(seekTime, allowSeekAhead=true)
-}
-// 時間管理スライダーを変更
-function changeTimeSlider() {
-    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoList[videoIndex].end - videoList[videoIndex].start)
-    // console.log(nowTime)
-    document.getElementById('timeSlider').value = nowTime
-    setTimeout(changeTimeSlider, 100)
-}
 
-// 開始停止ボタン
-function playArrow(){
-    if (playStatus == 1){
-        player.pauseVideo()
-    } else if (playStatus == 0) {
-        player.playVideo()
+// ループするのかの指定 true or false
+var repeat = true
+// document.getElementById('repeatButton').style.opacity = 0.5;  
+// ループをするしないの反転
+function changeRepeat () {
+    repeat = !repeat
+    console.log(repeat)
+    if (repeat){
+        document.getElementById('repeatButton').style.opacity = 1;  
+    } else {
+        document.getElementById('repeatButton').style.opacity = 0.5;  
     }
 }
-// スキップボタン
-function skipVideo () {
-    videoIndex += 1
-    specifiedVideos(videoIndex)
+
+
+// シャッフル用
+function fisherYatesShuffle(arr){
+    for(var i =arr.length-1 ; i>0 ;i-= 1){
+        var j = Math.floor( Math.random() * (i + 1) ); //random index
+        [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
+    }
+    return arr
 }
-// 戻るボタン
-function restoreVideo () {
-    videoIndex -= 1
-    specifiedVideos(videoIndex)
+// videoList をシャッフル
+function videoListShuffle (){
+    var nowVideoId = videoList[videoIndex].id
+    videoList = fisherYatesShuffle(videoList)
+    for (var i=0; i<videoList.length; i+= 1){
+        if (videoList[i].id == nowVideoId) {
+            videoIndex = i
+            if (videoIndex > videoList.length-1){
+                videoIndex = 0
+            }
+            // console.log(videoIndex)
+        }
+    }
+    // console.log(videoList)
+    htmlVideoList()
 }
 
-// アイコン＆titleの表示
-function information () {
-    var info = document.getElementById('information')
-    info.innerHTML = ''
-    var template = document.getElementById('templateInfo')
-    var newInfo = template.content.cloneNode(true);
-    // 編集
-    newInfo.querySelector('.title').textContent = videoList[videoIndex]['title']
-    newInfo.querySelector('.name').textContent = videoList[videoIndex]['name']
-    // 追加
-    info.appendChild(newInfo);
-    // タイトルの変更
-    document.title = videoList[videoIndex]['title']
-}
 
-// 画質の変更
-// できなかった
 // 再生速度
 document.getElementById('PlaybackRate').addEventListener('change', changePlaybackRate)
 function changePlaybackRate () {
