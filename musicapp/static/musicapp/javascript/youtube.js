@@ -48,7 +48,7 @@ var videoIndex = 0
 // 現在の再生状況 1: 再生中  0:停止中
 var playStatus = 0
 //動画再生中はfalse、次の動画の読み込み中にtrue
-var done = false
+var doneL = false
 // 次の動画の読み込み、再生ステータスの変更で矢印マークの変更
 function onPlayerStateChange(event){
     // console.log('onPlayerStateChange : '+event.data)
@@ -61,9 +61,9 @@ function onPlayerStateChange(event){
         document.getElementById('playArrow').src = '/static/musicapp/images/play_arrow_white_24dp.svg'
         playStatus = 0
     }
-    if (event.data==0 && !done){
+    if (event.data==0 && !doneL){
         videoIndex += 1;
-        done = true;
+        doneL = true;
         if (videoIndex >= videoList.length){
             if (repeat){
                 videoIndex = 0
@@ -73,8 +73,8 @@ function onPlayerStateChange(event){
             }
         }
         specifiedVideos(videoIndex)
-    } else if (event.data == 1 && done){
-        done = false;
+    } else if (event.data == 1 && doneL){
+        doneL = false;
     }
 }
 
@@ -260,14 +260,33 @@ function videoListShuffle (){
     videoList = fisherYatesShuffle(videoList)
     videoIndex = 0
     // 動画を更新
-    if (playStatus == 1){
-        specifiedVideos(videoIndex)
-    } else {
-        specifiedVideos(videoIndex)
-        setTimeout(function(){player.pauseVideo()},300)
-    }
+    // if (playStatus == 1){
+    //     specifiedVideos(videoIndex)
+    // } else {
+    //     specifiedVideos(videoIndex)
+    //     setTimeout(function(){player.pauseVideo()},300)
+    // }
     // htmlを変更
-    htmlVideoList()
+    // htmlVideoListだとコントロールまで変わる
+    // ulの取得
+    var movieUl = document.getElementById('movie-ul')
+    // templateの取得
+    var templateLi = document.getElementById('template-li')
+    // ulの初期化
+    movieUl.innerHTML = ''
+    // 曲のリストを表示
+    for (var i=0; i<videoList.length; i+= 1){
+        var newMovieLi = templateLi.content.cloneNode(true);
+        // 編集
+        newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
+        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:function(){videoIndex = this.index;specifiedVideos(videoIndex)}}, false);
+        newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
+        newMovieLi.querySelector('.img').alt = videoList[i]['movie']
+        newMovieLi.querySelector('.title').textContent = videoList[i]['title']
+        newMovieLi.querySelector('.name').textContent = videoList[i]['name']
+        // 追加
+        movieUl.appendChild(newMovieLi);
+    }
 }
 
 
