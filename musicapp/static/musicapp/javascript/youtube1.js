@@ -49,6 +49,8 @@ function onYouTubeIframeAPIReady() {
 
 // 再生する動画のindex
 // 次の動画のインデックスか今の動画のインデックスか混ざっている
+// 次の動画を読む関数のみで変更？
+// 今の動画のdbのユニークIDを保存？それとも新しく作る？
 var videoIndex = 0
 
 //https://qiita.com/tkgtamagohan/items/d2e56cbfc8af460c623a
@@ -193,6 +195,7 @@ function restoreVideo () {
 
 // 動画タイトルの表示、コントロール
 // テンプレートじゃなくていい
+// インデックスを使わない、引数を取る？
 function information () {
     var info = document.getElementById('information')
     info.innerHTML = ''
@@ -273,6 +276,7 @@ function changeRepeat () {
 // シャッフル用
 // 魔境
 // バグの原因
+// 前のように新しい動画でのインデックスを取得してそれを代入それからは今と同じ？
 function fisherYatesShuffle(arr){
     for(var i =arr.length-1 ; i>0 ;i-= 1){
         var j = Math.floor( Math.random() * (i + 1) ); //random index

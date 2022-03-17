@@ -48,14 +48,12 @@
                 <img src="{% static 'musicapp/images/skip_next_white_24dp.svg' %}" onclick="skipVideo()" class="buttonIcon">
             </div>
             <!-- タイトル -->
-            <div class="controlChild" id="information"></div>
-            <!-- テンプレート -->
-            <template id="templateInfo">
+            <div class="controlChild" id="information">
                 <div class="videoInfo" >
-                    <h1 class="title"></h1>
-                    <span class="name"></span>
+                    <h1 class="title" id="controlTitle"></h1>
+                    <span class="name" id="controlName"></span>
                 </div>
-            </template>
+            </div>
             <!-- レピート＆シャッフル -->
             <div class="controlChild">
                 <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" style="margin-left: auto;">
