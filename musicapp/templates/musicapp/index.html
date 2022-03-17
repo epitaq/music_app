@@ -57,15 +57,11 @@
                 </div>
             </template>
             <!-- レピート＆シャッフル -->
-            <div class="controlChild volumeRepeatShuffle">
-                <div class="slider control2">
-                    <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" >
-                </div>
-                <div class="control2">
-                    <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
-                    <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
-                    <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon">
-                </div> 
+            <div class="controlChild">
+                <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" style="margin-left: auto;">
+                <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
+                <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
+                <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon" style="margin-right: 32px;">
             </div>
         </div>
         {{ data|json_script:"data" }}
