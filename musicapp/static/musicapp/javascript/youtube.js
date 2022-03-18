@@ -118,7 +118,7 @@ function createHtmlMusicList () {
         var newMovieLi = templateLi.content.cloneNode(true);
         // 編集
         newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
-        newMovieLi.querySelector('.link').addEventListener('click', {index:i ,handleEvent:function(){videoIndex = this.index;specifiedVideos(videoIndex)}}, false);
+        newMovieLi.querySelector('.movieLi').addEventListener('click', {index:i ,handleEvent:function(){videoIndex = this.index;specifiedVideos(videoIndex)}}, false);
         newMovieLi.querySelector('.img').src = 'https://img.youtube.com/vi/' + videoList[i]['movie'] + '/default.jpg'
         newMovieLi.querySelector('.img').alt = videoList[i]['movie']
         newMovieLi.querySelector('.title').textContent = videoList[i]['title']
