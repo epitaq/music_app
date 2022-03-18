@@ -102,6 +102,8 @@ ul {
 .videoInfo{
     width: 100%;
     margin: 3px 0;
+    height: 76px;
+    white-space: nowrap;
 }
 /* .slider{
     margin: auto 0;
