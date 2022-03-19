@@ -102,6 +102,15 @@ function specifiedVideos (num) {
         startSeconds : videoList[num].start,
         endSeconds : videoList[num].end,
     })
+    // 再生されている動画を強調
+    // var movieUlCh =  document.getElementById('movie-ul').childNodes
+    for (var i=0; i < videoList.length; i++){
+        if (videoIndex == i){
+            document.getElementById(videoList[i].id).style = 'background-color: rgb(255,255,255,0.5);'
+        } else {
+            document.getElementById(videoList[i].id).style = ''
+        }
+    }
 }
 
 
