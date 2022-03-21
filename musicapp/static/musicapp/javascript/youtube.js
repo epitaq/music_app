@@ -23,8 +23,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: document.getElementById('player').clientHeight-32,
-        width: document.getElementById('player').clientWidth-32,
+        height: document.getElementById('primary').clientHeight-32,
+        width: document.getElementById('primary').clientWidth-32,
         videoId: videoList[videoIndex].movie,
         playerVars: {
             start: videoList[videoIndex].start,
@@ -293,3 +293,10 @@ function videoListShuffle () {
     // htmlの変更
     createHtmlMusicList()
 }
+
+
+// ウィンドウサイズが変わったら動画サイズも変更
+window.addEventListener('resize', function () {
+    player.setSize(width=document.getElementById('primary').clientWidth-32, 
+                    height=document.getElementById('primary').clientHeight-32)
+})
