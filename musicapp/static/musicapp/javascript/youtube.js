@@ -143,13 +143,21 @@ function createHtmlMusicList () {
 // 時間管理のスライダー 指定時間に飛ぶ
 document.getElementById('timeSlider').addEventListener('input', changeTime);
 function changeTime () {
+    videoMax = videoList[videoIndex].end
+    if (videoMax == -1){
+        videoMax = player.getDuration()
+    }
     var nowTime = document.getElementById('timeSlider').value
-    seekTime = (videoList[videoIndex].end - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
+    seekTime = (videoMax - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
     player.seekTo(seekTime, allowSeekAhead=true)
 }
 // 時間管理スライダーを変更
 function changeTimeSlider() {
-    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoList[videoIndex].end - videoList[videoIndex].start)
+    videoMax = videoList[videoIndex].end
+    if (videoMax == -1){
+        videoMax = player.getDuration()
+    }
+    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
     document.getElementById('timeSlider').value = nowTime
     setTimeout(changeTimeSlider, 100)
 }
