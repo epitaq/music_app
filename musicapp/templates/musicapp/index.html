@@ -54,7 +54,7 @@
             </div>
             <!-- レピート＆シャッフル -->
             <div class="controlChild">
-                <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" style="margin-left: auto;max-width: 100px;width: calc(33vw - 300px);">
+                <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" class="volumeSlider">
                 <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
                 <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
                 <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon" style="margin-right: 32px;">

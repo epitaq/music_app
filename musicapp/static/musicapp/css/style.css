@@ -107,6 +107,12 @@ ul {
     white-space: nowrap;
     overflow: hidden;
 }
+.volumeSlider{
+    min-width: 50px;
+    max-width: 100px;
+    width: calc(33vw - 300px);
+    margin-left: auto;
+}
 /* .slider{
     margin: auto 0;
 } */
