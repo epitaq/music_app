@@ -2,24 +2,23 @@
 # 主にタグ付けを目的にしている
 # tagとcsv_pathに入力
 
+
+# 読み込みの準備
 import sys
 import os
 import django
-
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
-
-# 読み込みの準備
 
 from musicapp.models import *
 import csv
 
 
 # 追加するタグをリスト型で保存
-tag = ['ホロライブ']
-# 追加するcsvの絶対path
-csv_path = '/Users/epita/Documents/python/music_app_create_db/tokino.csv'
+tag = ['ホロライブ','切り抜き']
+# 追加するcsvのpath
+csv_path = '/Users/epita/Documents/python/music_app/data/videoList4.csv'
 
 # 現在登録されているタグ
 c_tag = [str(Tag.objects.all()[i]) for i in range(len(Tag.objects.all()))]
@@ -34,7 +33,8 @@ for i in tag:
 with open (csv_path, 'r') as f:
     csv_r = csv.reader(f)
     for i in csv_r:
-        new = test.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
+        print(i[3])
+        new = MusicList.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
         new.save()
         for t in tag:
             new.keeping.add(Tag.objects.get(type=t))
