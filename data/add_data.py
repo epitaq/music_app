@@ -18,7 +18,7 @@ import csv
 # 追加するタグをリスト型で保存
 tag = ['ホロライブ','切り抜き']
 # 追加するcsvのpath
-csv_path = '/Users/epita/Documents/python/music_app/data/videoList4.csv'
+csv_path = 'data/videoList4.csv'
 
 # 現在登録されているタグ
 c_tag = [str(Tag.objects.all()[i]) for i in range(len(Tag.objects.all()))]
