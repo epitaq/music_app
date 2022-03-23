@@ -17,27 +17,28 @@ import csv
 
 # 追加するタグをリスト型で保存
 tag = ['ホロライブ','切り抜き']
-# 追加するcsvのpath
-csv_path = 'data/s7hakOSsU-I.csv'
+# 追加するcsvのpathのリスト デプロイがめんどくさかった
+csv_paths = ['data/videoList4.csv', 'data/s7hakOSsU-I.csv', 'data/RY_5mn2EY6s.csv', 'data/mhvHZpK-9Ss.csv', 'data/Cv_2tjVo-p4.csv']
 
-# 現在登録されているタグ
-c_tag = [str(Tag.objects.all()[i]) for i in range(len(Tag.objects.all()))]
-# 現在登録されていないtagを追加+確認
-for i in tag:
-    if i in c_tag:
-        pass
-    else:
-        Tag.objects.create(type=i)
+for csv_path in csv_paths:
+    # 現在登録されているタグ
+    c_tag = [str(Tag.objects.all()[i]) for i in range(len(Tag.objects.all()))]
+    # 現在登録されていないtagを追加+確認
+    for i in tag:
+        if i in c_tag:
+            pass
+        else:
+            Tag.objects.create(type=i)
 
-# dbに登録
-with open (csv_path, 'r') as f:
-    csv_r = csv.reader(f)
-    for i in csv_r:
-        print(i[3])
-        new = MusicList.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
-        new.save()
-        for t in tag:
-            new.keeping.add(Tag.objects.get(type=t))
+    # dbに登録
+    with open (csv_path, 'r') as f:
+        csv_r = csv.reader(f)
+        for i in csv_r:
+            print(i[3])
+            new = MusicList.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
+            new.save()
+            for t in tag:
+                new.keeping.add(Tag.objects.get(type=t))
 
 
 
