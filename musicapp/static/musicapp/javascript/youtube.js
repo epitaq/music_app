@@ -151,6 +151,14 @@ function changeTime () {
     seekTime = (videoMax - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
     player.seekTo(seekTime, allowSeekAhead=true)
 }
+// 時間用の0を追加
+function addZero (num) {
+    if (num < 10){
+        return '0'+num
+    } else {
+        return num+''
+    }
+}
 // 時間管理スライダーを変更
 function changeTimeSlider() {
     videoMax = videoList[videoIndex].end
@@ -158,8 +166,18 @@ function changeTimeSlider() {
         videoMax = player.getDuration()
     }
     var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
+    // スライダーの変更
     document.getElementById('timeSlider').value = nowTime
-    setTimeout(changeTimeSlider, 100)
+    // デジタルタイマーの変更
+    // 全体の時間
+    var videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
+    var videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
+    // 今の時間
+    var nowMin = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) / 60)) // 分の作成
+    var nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
+    // 表示
+    document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
+    setTimeout(changeTimeSlider, 500)
 }
 
 
