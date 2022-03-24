@@ -177,6 +177,7 @@ function changeTimeSlider() {
     var nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
     // 表示
     document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
+    // playStatusによって動作の終了
     if (playStatus == 1){
         setTimeout(changeTimeSlider, 500)
     } else {
