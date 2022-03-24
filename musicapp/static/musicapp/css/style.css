@@ -52,7 +52,7 @@ ul {
 }
 .music-list{
     overflow-y: scroll;
-    height: calc(100% - 20px);
+    height: calc(100% - 20px - 76px);  /* */
     margin: 10px 0;
 }
 .movieLi{

@@ -21,6 +21,13 @@
             <!-- 動画の再生リスト -->
             <div class="secondary columnsChild">
                 <!-- 設定 -->
+                <div style="height:76px">
+                    <select id="year" name="year" onChange="location.href='https://music-app-epita.herokuapp.com/?type='+value;">
+                        <option value="ホロライブ">ホロライブ</option>
+                        <option value="切り抜き">切り抜き</option>
+                        <option value="歌ってみた">歌ってみた</option>
+                    </select>
+                </div>
                 <!-- 再生リスト -->
                 <div class="music-list">
                     <ul id="movie-ul"></ul>
