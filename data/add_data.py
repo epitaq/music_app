@@ -16,9 +16,9 @@ import csv
 
 
 # 追加するタグをリスト型で保存
-tag = ['ホロライブ','切り抜き']
+tag = ['ホロライブ','歌ってみた']
 # 追加するcsvのpathのリスト デプロイがめんどくさかった
-csv_paths = ['data/videoList4.csv', 'data/s7hakOSsU-I.csv', 'data/RY_5mn2EY6s.csv', 'data/mhvHZpK-9Ss.csv', 'data/Cv_2tjVo-p4.csv']
+csv_paths = ['data/tokino.csv']
 
 for csv_path in csv_paths:
     # 現在登録されているタグ

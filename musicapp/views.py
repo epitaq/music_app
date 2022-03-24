@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import MusicList
+from .models import *
 
 
 
@@ -13,6 +13,10 @@ def index(request):
         music_list = music_list.filter(name__contains=request.GET['name'])
     if 'title' in request.GET:
         music_list = music_list.filter(title__contains=request.GET['title'])
+    if 'type' in request.GET:
+        music_list = music_list.filter(keeping=Tag.objects.get(type=request.GET['type']))
+    else:
+        music_list = music_list.filter(keeping=Tag.objects.get(type='切り抜き'))
     #dataを渡す
     music_data = list(music_list.values())
     context = {
