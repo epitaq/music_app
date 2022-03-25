@@ -5,6 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="content-language" content="ja">
         <title>music_app</title>
+        <link rel="icon" href="{% static 'musicapp/icon/favicon.ico' %}">
         <link rel="stylesheet" href="{% static 'musicapp/css/style.css' %}">
         {% if GOOGLE_ANALYTICS_TRACKING_ID %}
             {% include 'musicapp/ga.html' %}
@@ -22,7 +23,7 @@
             <div class="secondary columnsChild">
                 <!-- 設定 -->
                 <div style="height:76px">
-                    <select id="year" name="year" onChange="location.href='https://music-app-epita.herokuapp.com/?type='+value;">
+                    <select id="year" name="year" onchange="location.href='https://music-app-epita.herokuapp.com/?type='+value;">
                         <option hidden>選択してください</option>
                         <option value="ホロライブ">ホロライブ</option>
                         <option value="切り抜き">切り抜き</option>
