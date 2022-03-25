@@ -16,7 +16,7 @@ def index(request):
     if 'type' in request.GET:
         get_type = request.GET['type']
         if get_type in tag:
-            music_list = music_list.filter(keeping=Tag.objects.filter(type=get_type))
+            music_list = music_list.filter(keeping=Tag.objects.get(type=get_type))
     # タイトルと名前を一緒に検索
     # 二つのtypeを検索できない
     if 'q' in request.GET:
@@ -28,7 +28,7 @@ def index(request):
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
                 # q.add(Q(keeping=Tag.objects.get(type = key)), Q.AND)
-                music_list = music_list.filter(keeping=Tag.objects.filter(type = key))
+                music_list = music_list.filter(keeping=Tag.objects.get(type = key))
             else:
                 q.add(Q(Q(title__icontains=key) | Q(name__icontains=key)) , Q.AND)
         print(q)
