@@ -12,8 +12,9 @@ def index(request):
     print(request.GET.get)
     # タイプの選択
     if 'type' in request.GET:
-        music_list = music_list.filter(keeping=Tag.objects.filter(type__contains=request.GET['type']))
+        music_list = music_list.filter(keeping=Tag.objects.get(type=request.GET['type']))
     # タイトルと名前を一緒に検索
+    # 二つのtypeを検索できない
     if 'q' in request.GET:
         q = Q()
         search = request.GET['q'].replace('\u3000', ' ')
