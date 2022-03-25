@@ -233,7 +233,7 @@ function information () {
     document.getElementById('controlTitle').innerHTML = videoList[videoIndex].title
     document.getElementById('controlName').innerHTML = videoList[videoIndex].name
     // タイトルの変更
-    document.title = videoList[videoIndex]['title']
+    document.title = 'epita|' + videoList[videoIndex]['title']
 }
 
 
