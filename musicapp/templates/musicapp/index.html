@@ -22,15 +22,19 @@
             <!-- 動画の再生リスト -->
             <div class="secondary columnsChild">
                 <!-- 設定 -->
-                <div style="height:24px">
-                    <select id="year" name="year" onchange="location.href='https://music-app-epita.herokuapp.com/?type='+value;">
-                        <option hidden>選択してください</option>
-                        <!-- Djangoで自動作成 -->
-                        {% for type in keeping %}
-                            <!-- {{ type }} -->
-                            <option value="{{ type }}">{{ type }}</option>
-                        {% endfor %}
-                    </select>
+                <div style="height:24px" class="narrowDown">
+                    <form method="GET" >
+                        {% csrf_token %}
+                        <select name="type">
+                            <option hidden>選択してください</option>
+                            <!-- Djangoで自動作成 -->
+                            {% for type in keeping %}
+                                <option value="{{ type }}">{{ type }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" name="q">
+                        <button type="submit">検索</button>
+                    </form>
                 </div>
                 <!-- 再生リスト -->
                 <div class="music-list">

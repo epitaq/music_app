@@ -47,9 +47,13 @@ ul {
     height: 100%;
 }
 /* .secondary{} */
-.setting1{
+.narrowDown{
+    height: 24px;
     display: flex;
 }
+/* .setting1{
+    display: flex;
+} */
 .music-list{
     overflow-y: scroll;
     height: calc(100% - 20px - 24px);  /* */
