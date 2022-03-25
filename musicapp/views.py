@@ -24,9 +24,11 @@ def index(request):
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
-                q.add(Q(keeping=Tag.objects.get(type = key)), Q.AND)
+                # q.add(Q(keeping=Tag.objects.get(type = key)), Q.AND)
+                music_list = music_list.filter(keeping=Tag.objects.get(type = key))
             else:
                 q.add(Q(Q(title__icontains=key) | Q(name__icontains=key)) , Q.AND)
+        print(q)
         music_list = music_list.filter(q)
     #dataを渡す
     music_data = list(music_list.values())
