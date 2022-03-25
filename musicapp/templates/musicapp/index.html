@@ -59,24 +59,24 @@
             <div class="controlChild">
                 <!-- 時間管理のスライダー -->
                 <input type="range" min="0" max="1" step="0.001" value="0" id="timeSlider" class="timeSlider" >
-                <img src="{% static 'musicapp/images/skip_previous_white_24dp.svg' %}" onclick="restoreVideo()" class="buttonIcon" style="margin-left: 32px">
-                <img src="{% static 'musicapp/images/play_arrow_white_24dp.svg' %}" id="playArrow" onclick="playArrow()" class="buttonIcon">
-                <img src="{% static 'musicapp/images/skip_next_white_24dp.svg' %}" onclick="skipVideo()" class="buttonIcon">
+                <img src="{% static 'musicapp/images/skip_previous_white_24dp.svg' %}" onclick="restoreVideo()" class="LIcon" style="margin-left: 56px">
+                <img src="{% static 'musicapp/images/play_arrow_white_24dp.svg' %}" id="playArrow" onclick="playArrow()" class="LIcon">
+                <img src="{% static 'musicapp/images/skip_next_white_24dp.svg' %}" onclick="skipVideo()" class="LIcon" style="margin-right: 24px;">
                 <div id="digitalTimer">00:00/00:00</div>
             </div>
             <!-- タイトル -->
             <div class="controlChild" id="information">
                 <div class="videoInfo" >
-                    <h1 class="title" id="controlTitle"></h1>
-                    <div class="name" id="controlName"></div>
+                    <div class="conTitle" id="controlTitle"></div>
+                    <div class="conName" id="controlName"></div>
                 </div>
             </div>
-            <!-- レピート＆シャッフル -->
+            <!-- レピート＆シャッフル&VOL -->
             <div class="controlChild">
                 <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" class="volumeSlider">
-                <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="buttonIcon" >
-                <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="buttonIcon" >
-                <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle();" class="buttonIcon" style="margin-right: 32px;">
+                <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="RIcon" >
+                <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="RIcon" >
+                <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle()" class="RIcon" style="margin-right: 32px;">
             </div>
         </div>
         {{ data|json_script:"data" }}
