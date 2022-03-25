@@ -25,10 +25,11 @@
                 <div style="height:76px">
                     <select id="year" name="year" onchange="location.href='https://music-app-epita.herokuapp.com/?type='+value;">
                         <option hidden>選択してください</option>
-                        <option value="ホロライブ">ホロライブ</option>
-                        <option value="にじさんじ">にじさんじ</option>
-                        <option value="切り抜き">切り抜き</option>
-                        <option value="歌ってみた">歌ってみた</option>
+                        <!-- Djangoで自動作成 -->
+                        {% for type in keeping %}
+                            <!-- {{ type }} -->
+                            <option value={{ type }}>{{ type }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <!-- 再生リスト -->

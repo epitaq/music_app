@@ -19,5 +19,6 @@ def index(request):
     music_data = list(music_list.values())
     context = {
         'data': music_data,
+        'keeping': [type['type'] for type in Tag.objects.all().values()]
     }
     return render(request, 'musicapp/index.html', context)
