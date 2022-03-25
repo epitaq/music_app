@@ -26,7 +26,7 @@
                     <form method="GET" >
                         {% csrf_token %}
                         <select name="type">
-                            <option hidden value="">選択してください</option>
+                            <option value="" selected>全て</option>
                             <!-- Djangoで自動作成 -->
                             {% for type in keeping %}
                                 <option value="{{ type }}">{{ type }}</option>
