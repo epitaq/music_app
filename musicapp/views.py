@@ -10,9 +10,13 @@ def index(request):
     #getの確認＋dbを叩く
     # 部分的な一致を検索
     print(request.GET.get)
+    # タグの一覧
+    tag = [type['type'] for type in Tag.objects.all().values()]
     # タイプの選択
     if 'type' in request.GET:
-        music_list = music_list.filter(keeping=Tag.objects.get(type=request.GET['type']))
+        get_type = request.GET['type']
+        if get_type in tag:
+            music_list = music_list.filter(keeping=Tag.objects.get(type=get_type))
     # タイトルと名前を一緒に検索
     # 二つのtypeを検索できない
     if 'q' in request.GET:
@@ -20,7 +24,6 @@ def index(request):
         search = request.GET['q'].replace('\u3000', ' ')
         search = search.split(' ')
         print(search)
-        tag = [type['type'] for type in Tag.objects.all().values()]
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
