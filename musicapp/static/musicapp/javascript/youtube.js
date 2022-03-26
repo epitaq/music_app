@@ -91,6 +91,10 @@ function specifiedVideos (num) {
         num = 0
         videoIndex = 0
         shuffleDone = false
+        // 上までスクロール
+        document.getElementById(videoList[0].id).scrollIntoView({
+            behavior: 'smooth'
+        })
     }
     // コントロール
     information ()
