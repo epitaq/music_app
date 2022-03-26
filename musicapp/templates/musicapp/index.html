@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ja"> 
+<html lang="ja">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="content-language" content="ja">
@@ -74,8 +74,10 @@
             </div>
             <!-- レピート＆シャッフル&VOL -->
             <div class="controlChild">
-                <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" class="volumeSlider">
-                <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="RIcon" >
+                <div class="volume" id="volume">
+                    <input type="range" min="0" max="100" step="1" value="100" id="volumeSlider" class="volumeSlider" style="display: none;">
+                    <img src="{% static 'musicapp/images/volume_up_white_24dp.svg' %}" id="volumeButton" onclick="changeMute()" class="RIcon" >
+                </div>
                 <img src="{% static 'musicapp/images/repeat_white_24dp.svg' %}" id="repeatButton" onclick="changeRepeat()" class="RIcon" >
                 <img src="{% static 'musicapp/images/shuffle_white_24dp.svg' %}" id="shuffleButton" onclick="videoListShuffle()" class="RIcon" style="margin-right: 32px;">
             </div>

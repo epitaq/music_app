@@ -33,7 +33,7 @@ function onYouTubeIframeAPIReady() {
             controls: 0,
         },
         events: {
-            onStateChange: onPlayerStateChange, 
+            onStateChange: onPlayerStateChange,
             onReady: createHtmlMusicList,
             onError: skipVideo,
         }
@@ -47,7 +47,7 @@ var videoIndex = 0
 
 // 現在の再生状況 1: 再生中  0:停止中
 var playStatus = 0
-// 
+//
 var loadDone = false
 
 function onPlayerStateChange (event){
@@ -78,7 +78,7 @@ function onPlayerStateChange (event){
     } else if (event.data==1 && loadDone) {
         loadDone = false
     }
-    // 
+    //
     // スライダーを起動
     changeTimeSlider()
 }
@@ -236,7 +236,15 @@ function information () {
     document.title = 'epita | ' + videoList[videoIndex]['title']
 }
 
-
+// 音量スライダーの非表示
+document.getElementById('volume').addEventListener('mouseenter',() => {
+    document.getElementById('volumeSlider').style.display = ''
+})
+document.getElementById('volume').addEventListener('mouseleave',() => {
+    setTimeout(() => {
+        document.getElementById('volumeSlider').style.display = 'none'
+    }, 500);
+})
 // 音量のデータ
 var lastVolume = 100
 // クッキーから取得
@@ -291,9 +299,9 @@ var repeat = true
 function changeRepeat () {
     repeat = !repeat
     if (repeat){
-        document.getElementById('repeatButton').style.opacity = 1;  
+        document.getElementById('repeatButton').style.opacity = 1;
     } else {
-        document.getElementById('repeatButton').style.opacity = 0.5;  
+        document.getElementById('repeatButton').style.opacity = 0.5;
     }
 }
 
@@ -328,6 +336,6 @@ function videoListShuffle () {
 
 // ウィンドウサイズが変わったら動画サイズも変更
 window.addEventListener('resize', function () {
-    player.setSize(width=document.getElementById('primary').clientWidth-32, 
+    player.setSize(width=document.getElementById('primary').clientWidth-32,
                     height=document.getElementById('primary').clientHeight-32)
 })
