@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     # ex: /polls/
-    path('', views.index, name='index'),
+    path('', views.player, name='player'),
+    path('home/', views.home, name='home'),
 ]

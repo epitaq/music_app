@@ -4,8 +4,12 @@ from django.db.models import Q
 from .models import *
 
 
+def home(request):
+    context = {
+    }
+    return render(request, 'musicapp/index.html', context)
 
-def index(request):
+def player(request):
     music_list = MusicList.objects
     #getの確認＋dbを叩く
     # 部分的な一致を検索
@@ -39,4 +43,4 @@ def index(request):
         'data': music_data,
         'keeping': [type['type'] for type in Tag.objects.all().values()]
     }
-    return render(request, 'musicapp/index.html', context)
+    return render(request, 'musicapp/player.html', context)
