@@ -7,7 +7,7 @@ from .models import *
 def home(request):
     context = {
     }
-    return render(request, 'musicapp/index.html', context)
+    return render(request, 'musicapp/home.html', context)
 
 def player(request):
     music_list = MusicList.objects
