@@ -8,12 +8,19 @@
         <title>music_app</title>
         <!-- ファビコン -->
         <link rel="icon" href="{% static 'musicapp/icon/favicon.ico' %}">
+        <!-- css -->
+        <link rel="stylesheet" href="{% static 'musicapp/css/home.css' %}">
         <!-- フォント -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
     </head>
     <body>
-
+        <div >
+            <form method="GET" action="{% url 'player' %}">
+                {% csrf_token %}
+                <input type="text" name="q"  placeholder="検索">
+            </form>
+        </div>
     </body>
 </html>
