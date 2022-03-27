@@ -22,11 +22,12 @@ def player(request):
     tag = [type['type'] for type in Tag.objects.all().values()]
     # タイプの選択
     if 'type' in request.GET:
-        get_type = request.GET['type']
-        if get_type in tag:
-            music_list = music_list.filter(keeping=Tag.objects.get(type=get_type))
+        get_type = request.GET['type'].replace('\u3000', ' ')
+        get_type = get_type.split(' ')
+        for i in get_type:
+            if i in tag:
+                music_list = music_list.filter(keeping=Tag.objects.get(type=i))
     # タイトルと名前を一緒に検索
-    # 二つのtypeを検索できない
     if 'q' in request.GET:
         q = Q()
         search = request.GET['q'].replace('\u3000', ' ')
