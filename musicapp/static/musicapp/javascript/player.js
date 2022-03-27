@@ -49,13 +49,7 @@ var searchParams = new URLSearchParams(window.location.search)
 if (searchParams.get('v') && videoList.find((ob) => ob.id == searchParams.get('v'))){
     videoIndex = videoList.indexOf(videoList.find((ob) => ob.id == searchParams.get('v')))
 }
-// 選択されている動画を強調
-setTimeout(() => {
-    document.getElementById(videoList[videoIndex].id).style = 'background-color: rgb(255,255,255,0.5);'
-    document.getElementById(videoList[videoIndex].id).scrollIntoView({
-        behavior: 'smooth'
-    })
-}, 1000);
+
 
 // 現在の再生状況 1: 再生中  0:停止中
 var playStatus = 0
@@ -118,19 +112,12 @@ function specifiedVideos (num) {
         startSeconds : videoList[num].start,
         endSeconds : videoList[num].end,
     })
-    // 再生されている動画を強調
-    // var movieUlCh =  document.getElementById('movie-ul').childNodes
-    for (var i=0; i < videoList.length; i++){
-        if (videoIndex == i){
-            document.getElementById(videoList[i].id).style = 'background-color: rgb(255,255,255,0.5);'
-        } else {
-            document.getElementById(videoList[i].id).style = ''
-        }
-    }
+    // 再生中の動画を強調
+    emphasisVideos()
 }
 
 
-// ミュージックリストのhtmlを変更
+// htmlを変更
 function createHtmlMusicList () {
     // ulの取得
     var movieUl = document.getElementById('movie-ul')
@@ -153,6 +140,30 @@ function createHtmlMusicList () {
     }
     // コントロール
     information()
+    // 再生中の動画を強調
+    emphasisVideos()
+}
+
+// 再生中の動画を強調
+function emphasisVideos(){
+    // バックグランドの色を変更
+    for (var i=0; i < videoList.length; i++){
+        if (videoIndex == i){
+            document.getElementById(videoList[i].id).style = 'background-color: rgb(255,255,255,0.5);'
+        } else {
+            document.getElementById(videoList[i].id).style = ''
+        }
+    }
+    // スクロール 強調したい動画よりも上にスクロール
+    var add = 3
+    if (videoIndex-add < 0){
+        add = 0
+    }
+    setTimeout(() => {
+        document.getElementById(videoList[videoIndex-add].id).scrollIntoView({
+            behavior: 'smooth'
+        })
+    }, 500);
 }
 
 
