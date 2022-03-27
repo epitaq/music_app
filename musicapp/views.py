@@ -6,6 +6,7 @@ from .models import *
 
 def home(request):
     context = {
+        'videoList' : MusicList.objects.all().values()
     }
     return render(request, 'musicapp/home.html', context)
 

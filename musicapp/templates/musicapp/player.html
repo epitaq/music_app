@@ -8,9 +8,10 @@
         <title>music_app</title>
         <link rel="icon" href="{% static 'musicapp/icon/favicon.ico' %}">
         <link rel="stylesheet" href="{% static 'musicapp/css/player.css' %}">
+        <!-- フォント -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
         {% if GOOGLE_ANALYTICS_TRACKING_ID %}
             {% include 'musicapp/ga.html' %}
         {% endif %}
@@ -47,8 +48,8 @@
                         <li class="movieLi" >
                             <img class="img">
                             <div class="titleName">
-                                <h2 class="title"></h2>
-                                <span class="name"></span>
+                                <p class="title"></p>
+                                <p class="name"></p>
                             </div>
                         </li>
                     </template>
@@ -68,8 +69,8 @@
             <!-- タイトル -->
             <div class="controlChild" id="information">
                 <div class="videoInfo" >
-                    <div class="conTitle" id="controlTitle"></div>
-                    <div class="conName" id="controlName"></div>
+                    <p class="conTitle" id="controlTitle"></p>
+                    <p class="conName" id="controlName"></p>
                 </div>
             </div>
             <!-- レピート＆シャッフル&VOL -->

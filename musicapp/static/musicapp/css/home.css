@@ -22,4 +22,54 @@ body {
     background-color: black;
     color:  white;
     font-family: 'Kiwi Maru', serif;
+    margin: 0 56px;
+}
+.search{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 5rem 0;
+}
+.videoList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.video{
+    height: 15rem;
+    width: 16rem;
+    overflow-x: hidden;
+    line-height: 1.4;
+    margin:0.5rem 1rem;
+    overflow: hidden;
+}
+.img{
+    width: 16rem;
+}
+.title{
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.name{
+    overflow: hidden;
+    font-size: 0.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.box{
+    width: 50%;
+    padding: 0.5em;
+    line-height: 1;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 2em 2em 2em 2em;
+    padding-left: 2em;
+    padding-right: 1em;
 }

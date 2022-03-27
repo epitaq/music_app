@@ -74,6 +74,10 @@ ul {
     margin: 0.2rem 1rem;
     line-height: 1.2;
 }
+.title{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
 .control{
     position: fixed;
     bottom: 0;
