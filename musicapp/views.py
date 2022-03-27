@@ -2,11 +2,14 @@ from ast import And
 from django.shortcuts import render
 from django.db.models import Q
 from .models import *
+import random
 
 
 def home(request):
+    videoList = list(MusicList.objects.all().values())
+    random_videoList = random.sample(videoList, len(videoList))
     context = {
-        'videoList' : MusicList.objects.all().values()
+        'videoList' : random_videoList
     }
     return render(request, 'musicapp/home.html', context)
 
