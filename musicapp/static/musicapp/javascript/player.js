@@ -44,6 +44,18 @@ function onYouTubeIframeAPIReady() {
 // videoListを変更するたびに更新する
 // 基本的には今の動画のvideoListでのインデックスを保存する
 var videoIndex = 0
+// 最初に再生する動画の指定がある場合
+var searchParams = new URLSearchParams(window.location.search)
+if (searchParams.get('v')){
+    videoIndex = videoList.indexOf(videoList.find((ob) => ob.id == searchParams.get('v')))
+}
+// 選択されている動画を強調
+setTimeout(() => {
+    document.getElementById(videoList[videoIndex].id).style = 'background-color: rgb(255,255,255,0.5);'
+    document.getElementById(videoList[videoIndex].id).scrollIntoView({
+        behavior: 'smooth'
+    })
+}, 1000);
 
 // 現在の再生状況 1: 再生中  0:停止中
 var playStatus = 0

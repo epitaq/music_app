@@ -24,11 +24,11 @@
         </div>
         <div class="videoList">
             {% for video in videoList %}
-                <div class="video">
+                <a href="{% url 'player' %}?v={{ video.id }}" class="video">
                     <img src="https://img.youtube.com/vi/{{ video.movie }}/mqdefault.jpg" alt="{{ video.movie }}" class="img">
                     <p class="title">{{ video.title }}</p>
                     <p class="name">{{ video.name }}</p>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </body>

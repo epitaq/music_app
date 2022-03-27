@@ -24,6 +24,11 @@ body {
     font-family: 'Kiwi Maru', serif;
     margin: 0 56px;
 }
+a {
+    text-decoration:none;
+    color: white;
+}
+
 .search{
     display: flex;
     justify-content: center;
