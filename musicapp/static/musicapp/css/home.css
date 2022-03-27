@@ -69,7 +69,7 @@ a {
 
 .box{
     width: 50%;
-    padding: 0.5em;
+    padding: 1rem;
     line-height: 1;
     border: 1px solid #000000;
     box-sizing: border-box;
