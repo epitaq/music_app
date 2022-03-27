@@ -46,7 +46,7 @@ function onYouTubeIframeAPIReady() {
 var videoIndex = 0
 // 最初に再生する動画の指定がある場合
 var searchParams = new URLSearchParams(window.location.search)
-if (searchParams.get('v')){
+if (searchParams.get('v') && videoList.find((ob) => ob.id == searchParams.get('v'))){
     videoIndex = videoList.indexOf(videoList.find((ob) => ob.id == searchParams.get('v')))
 }
 // 選択されている動画を強調

@@ -27,6 +27,11 @@ body {
 ul {
     list-style: none;
 }
+a {
+    text-decoration:none;
+    color: white;
+}
+
 .header{
     height: 32px;
     text-align: center;
