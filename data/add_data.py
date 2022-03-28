@@ -16,9 +16,9 @@ import csv
 
 
 # 追加するタグをリスト型で保存
-tag = ['アニメ','切り抜き','茅野愛衣']
+tag = ['ホロライブ','歌ってみた']
 # 追加するcsvのpathのリスト デプロイがめんどくさかった
-csv_paths = ['data/otiai1.csv']
+csv_paths = ['data/2holoList.csv']
 
 for csv_path in csv_paths:
     # 現在登録されているタグ
