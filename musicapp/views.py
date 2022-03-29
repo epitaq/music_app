@@ -16,14 +16,14 @@ def home(request):
 def player(request):
     music_list = MusicList.objects
     #getの確認＋dbを叩く
-    print(request.GET.get)
+    print(request.POST.get)
     # タグの一覧
     tag = [type['type'] for type in Tag.objects.all().values()]
 
     # タイプの選択 OR検索
-    if 'type' in request.GET:
+    if 'type' in request.POST:
         q =Q()
-        get_type = request.GET.getlist('type')
+        get_type = request.POST.getlist('type')
         for i in get_type:
             if i in tag:
                 q.add(Q(keeping=Tag.objects.get(type = i)), Q.OR)
@@ -32,9 +32,9 @@ def player(request):
         music_list = music_list.filter(q)
 
     # タイトルと名前を一緒に検索 AND検索
-    if 'q' in request.GET:
+    if 'q' in request.POST:
         q = Q()
-        search = request.GET['q'].replace('\u3000', ' ')
+        search = request.POST['q'].replace('\u3000', ' ')
         search = search.split(' ')
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND

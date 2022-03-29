@@ -17,7 +17,7 @@
     </head>
     <body>
         <div>
-            <form method="GET" action="{% url 'player' %}" class="search">
+            <form method="POST" action="{% url 'player' %}" class="search">
                 {% csrf_token %}
                 <input type="text" name="q"  placeholder="検索" class="box">
             </form>
