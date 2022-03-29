@@ -87,6 +87,13 @@ function onPlayerStateChange (event){
     //
     // スライダーを起動
     changeTimeSlider()
+    // タイトルの変更
+    document.title = 'epita | ' + videoList[videoIndex]['title']
+    // 履歴の保存
+    let url = new URL(window.location.href);
+    if (videoList[videoIndex]['id'] != url.searchParams.get('v')) {
+        history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
+    }
 }
 
 
@@ -157,7 +164,7 @@ function emphasisVideos(){
     // スクロール 強調したい動画よりも上にスクロール
     let add = 3
     if (videoIndex-add < 0){
-        add = 0
+        add = videoIndex
     }
     setTimeout(() => {
         document.getElementById(videoList[videoIndex-add].id).scrollIntoView({
@@ -261,17 +268,6 @@ function information () {
     // htmlの書き換え
     document.getElementById('controlTitle').innerHTML = videoList[videoIndex].title
     document.getElementById('controlName').innerHTML = videoList[videoIndex].name
-    // タイトルの変更
-    // document.title = 'epita | ' + videoList[videoIndex]['title']
-    // URLの変更
-    let url = new URL(window.location.href);
-    if (videoList[videoIndex]['id'] == url.searchParams.get('v')) {
-        console.log(1)
-    } else {
-        console.log(0)
-        document.title = 'epita | ' + videoList[videoIndex]['title']
-        history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
-    }
 }
 
 // 音量スライダーの非表示
@@ -375,6 +371,7 @@ window.addEventListener('resize', function () {
     player.setSize(width=document.getElementById('primary').clientWidth-32,
                     height=document.getElementById('primary').clientHeight-32)
 })
+
 
 // typeの選択
 document.getElementById('selectType').addEventListener('mouseenter',() =>{
