@@ -261,6 +261,14 @@ function information () {
     document.getElementById('controlName').innerHTML = videoList[videoIndex].name
     // タイトルの変更
     document.title = 'epita | ' + videoList[videoIndex]['title']
+    // URLの変更
+    let url = new URL(window.location.href);
+    if (videoList[videoIndex]['id'] == url.searchParams.get('v')) {
+        console.log(1)
+    } else {
+        console.log(0)
+        window.history.pushState(null, '', `?v=${videoList[videoIndex]['id']}`)
+    }
 }
 
 // 音量スライダーの非表示
