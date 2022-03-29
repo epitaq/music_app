@@ -255,13 +255,15 @@ function skipVideo () {
     } else {
         videoIndex += 1
     }
-    if (playStatus == 1){
-        specifiedVideos(videoIndex)
-    } else {
-        specifiedVideos(videoIndex)
-        // 遅延を無くした
-        player.pauseVideo()
-    }
+    // 前の状態を見ずに再生
+    specifiedVideos(videoIndex)
+    // if (playStatus == 1){
+    //     specifiedVideos(videoIndex)
+    // } else {
+    //     specifiedVideos(videoIndex)
+    //     // 遅延を無くした
+    //     player.pauseVideo()
+    // }
 }
 // 戻るボタン
 function restoreVideo () {
@@ -271,13 +273,15 @@ function restoreVideo () {
     } else {
         videoIndex -= 1
     }
-    if (playStatus == 1){
-        specifiedVideos(videoIndex)
-    } else {
-        specifiedVideos(videoIndex)
-        // 遅延を無くした
-        player.pauseVideo()
-    }
+    // 前の状態を見ずに再生
+    specifiedVideos(videoIndex)
+    // if (playStatus == 1){
+    //     specifiedVideos(videoIndex)
+    // } else {
+    //     specifiedVideos(videoIndex)
+    //     // 遅延を無くした
+    //     player.pauseVideo()
+    // }
 }
 
 
