@@ -243,6 +243,8 @@ function restoreVideo () {
     // videoIndexがマイナスになることを考える 最後に飛ぶ
     if (videoIndex < 1){
         videoIndex = videoList.length - 1
+    } else {
+        videoIndex -= 1
     }
     if (playStatus == 1){
         specifiedVideos(videoIndex)
@@ -260,14 +262,15 @@ function information () {
     document.getElementById('controlTitle').innerHTML = videoList[videoIndex].title
     document.getElementById('controlName').innerHTML = videoList[videoIndex].name
     // タイトルの変更
-    document.title = 'epita | ' + videoList[videoIndex]['title']
+    // document.title = 'epita | ' + videoList[videoIndex]['title']
     // URLの変更
     let url = new URL(window.location.href);
     if (videoList[videoIndex]['id'] == url.searchParams.get('v')) {
         console.log(1)
     } else {
         console.log(0)
-        window.history.pushState(null, '', `?v=${videoList[videoIndex]['id']}`)
+        document.title = 'epita | ' + videoList[videoIndex]['title']
+        history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
     }
 }
 
