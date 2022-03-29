@@ -90,12 +90,13 @@ function onPlayerStateChange (event){
     // タイトルの変更
     document.title = 'epita | ' + videoList[videoIndex]['title']
     // 履歴の保存
-    let url = new URL(window.location.href);
-    if (videoList[videoIndex]['id'] != url.searchParams.get('v')) {
-        setTimeout(() => {
-            history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
-        }, 1000);
-    }
+    // 履歴のURLとタイトルが合わないことが多い
+    // let url = new URL(window.location.href);
+    // if (videoList[videoIndex]['id'] != url.searchParams.get('v')) {
+    //     setTimeout(() => {
+    //         history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
+    //     }, 1000);
+    // }
 }
 
 
