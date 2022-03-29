@@ -92,7 +92,9 @@ function onPlayerStateChange (event){
     // 履歴の保存
     let url = new URL(window.location.href);
     if (videoList[videoIndex]['id'] != url.searchParams.get('v')) {
-        history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
+        setTimeout(() => {
+            history.pushState({}, '', `?v=${videoList[videoIndex]['id']}`)
+        }, 1000);
     }
 }
 
@@ -177,7 +179,7 @@ function emphasisVideos(){
 // 時間管理のスライダー 指定時間に飛ぶ
 document.getElementById('timeSlider').addEventListener('input', changeTime);
 function changeTime () {
-    videoMax = videoList[videoIndex].end
+    let videoMax = videoList[videoIndex].end
     if (videoMax == -1){
         videoMax = player.getDuration()
     }
@@ -195,30 +197,45 @@ function addZero (num) {
 }
 // 時間管理スライダーを変更
 function changeTimeSlider() {
-    videoMax = videoList[videoIndex].end
+    let videoMax = videoList[videoIndex].end
     if (videoMax == -1){
         videoMax = player.getDuration()
     }
-    let nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
-    // スライダーの変更
-    document.getElementById('timeSlider').value = nowTime
-    // デジタルタイマーの変更
-    // 全体の時間
-    let videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
-    let videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
-    // 今の時間
-    let nowMin = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) / 60)) // 分の作成
-    let nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
-    // 表示
-    document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
+    // 未開始の時は再生時間などを取得できない
+    if (player.getPlayerState() == -1){
+        // スライダーの変更
+        document.getElementById('timeSlider').value = 0
+        // デジタルタイマーの変更
+        if (videoList[videoIndex].end == -1){
+            // 一本の動画の場合
+            document.getElementById('digitalTimer').innerHTML = '00:00' + '/' + '00:00'
+        } else {
+            // 切り抜きの場合
+            let videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
+            let videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
+            document.getElementById('digitalTimer').innerHTML = '00:00' + '/' + videoMin + ':' + videoSec
+        }
+    } else {
+        let nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
+        // スライダーの変更
+        document.getElementById('timeSlider').value = nowTime
+        // デジタルタイマーの変更
+        // 全体の時間
+        let videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
+        let videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
+        // 今の時間
+        let nowMin = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) / 60)) // 分の作成
+        let nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
+        // 表示
+        document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
+    }
     // playStatusによって動作の終了
     if (playStatus == 1){
-        setTimeout(changeTimeSlider, 500)
+        setTimeout(changeTimeSlider, 200)
     } else {
         return 0
     }
 }
-
 
 
 // 開始停止ボタン
