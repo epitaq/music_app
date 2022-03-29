@@ -203,7 +203,7 @@ function changeTimeSlider() {
         videoMax = player.getDuration()
     }
     // 未開始の時は再生時間などを取得できない
-    if (player.getPlayerState() == -1){
+    if (player.getPlayerState() == -1 || player.getPlayerState() == 3){
         // スライダーの変更
         document.getElementById('timeSlider').value = 0
         // デジタルタイマーの変更
@@ -257,13 +257,6 @@ function skipVideo () {
     }
     // 前の状態を見ずに再生
     specifiedVideos(videoIndex)
-    // if (playStatus == 1){
-    //     specifiedVideos(videoIndex)
-    // } else {
-    //     specifiedVideos(videoIndex)
-    //     // 遅延を無くした
-    //     player.pauseVideo()
-    // }
 }
 // 戻るボタン
 function restoreVideo () {
@@ -275,13 +268,6 @@ function restoreVideo () {
     }
     // 前の状態を見ずに再生
     specifiedVideos(videoIndex)
-    // if (playStatus == 1){
-    //     specifiedVideos(videoIndex)
-    // } else {
-    //     specifiedVideos(videoIndex)
-    //     // 遅延を無くした
-    //     player.pauseVideo()
-    // }
 }
 
 
