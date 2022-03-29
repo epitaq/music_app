@@ -16,23 +16,26 @@ def home(request):
 def player(request):
     music_list = MusicList.objects
     #getの確認＋dbを叩く
-    # 部分的な一致を検索
     print(request.GET.get)
     # タグの一覧
     tag = [type['type'] for type in Tag.objects.all().values()]
-    # タイプの選択
+
+    # タイプの選択 OR検索
     if 'type' in request.GET:
-        get_type = request.GET['type'].replace('\u3000', ' ')
-        get_type = get_type.split(' ')
+        q =Q()
+        get_type = request.GET.getlist('type')
         for i in get_type:
             if i in tag:
-                music_list = music_list.filter(keeping=Tag.objects.get(type=i))
-    # タイトルと名前を一緒に検索
+                q.add(Q(keeping=Tag.objects.get(type = i)), Q.OR)
+        print('type,Q')
+        print(q)
+        music_list = music_list.filter(q)
+
+    # タイトルと名前を一緒に検索 AND検索
     if 'q' in request.GET:
         q = Q()
         search = request.GET['q'].replace('\u3000', ' ')
         search = search.split(' ')
-        print(search)
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
@@ -40,6 +43,7 @@ def player(request):
                 music_list = music_list.filter(keeping=Tag.objects.get(type = key))
             else:
                 q.add(Q(Q(title__icontains=key) | Q(name__icontains=key)) , Q.AND)
+        print('q,Q')
         print(q)
         music_list = music_list.filter(q)
     #dataを渡す
@@ -48,4 +52,5 @@ def player(request):
         'data': music_data,
         'keeping': [type['type'] for type in Tag.objects.all().values()]
     }
+
     return render(request, 'musicapp/player.html', context)

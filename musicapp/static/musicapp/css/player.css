@@ -56,6 +56,13 @@ a {
 .narrowDown{
     height: 24px;
     display: flex;
+    margin-left: auto;
+    z-index: 10000;
+}
+.checkbox{
+    height: 12rem;
+    background-color: black;
+    padding: 1rem;
 }
 /* .setting1{
     display: flex;
@@ -82,6 +89,12 @@ a {
 .title{
     font-size: 1.5rem;
     font-weight: bold;
+}
+.titleANDname{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
 }
 .control{
     position: fixed;

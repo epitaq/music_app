@@ -16,11 +16,11 @@ if (videoList.length == 0){
 
 
 // youtube iframe api
-var tag = document.createElement('script');
+let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
+let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-var player;
+let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         height: document.getElementById('primary').clientHeight-32,
@@ -43,18 +43,18 @@ function onYouTubeIframeAPIReady() {
 
 // videoListを変更するたびに更新する
 // 基本的には今の動画のvideoListでのインデックスを保存する
-var videoIndex = 0
+let videoIndex = 0
 // 最初に再生する動画の指定がある場合
-var searchParams = new URLSearchParams(window.location.search)
+let searchParams = new URLSearchParams(window.location.search)
 if (searchParams.get('v') && videoList.find((ob) => ob.id == searchParams.get('v'))){
     videoIndex = videoList.indexOf(videoList.find((ob) => ob.id == searchParams.get('v')))
 }
 
 
 // 現在の再生状況 1: 再生中  0:停止中
-var playStatus = 0
+let playStatus = 0
 //
-var loadDone = false
+let loadDone = false
 
 function onPlayerStateChange (event){
     // 再生ボタンの形 playStatusここでのみ変更
@@ -120,14 +120,14 @@ function specifiedVideos (num) {
 // htmlを変更
 function createHtmlMusicList () {
     // ulの取得
-    var movieUl = document.getElementById('movie-ul')
+    let movieUl = document.getElementById('movie-ul')
     // templateの取得
-    var templateLi = document.getElementById('template-li')
+    let templateLi = document.getElementById('template-li')
     // ulの初期化
     movieUl.innerHTML = ''
     // 曲のリストを表示
-    for (var i=0; i<videoList.length; i+= 1){
-        var newMovieLi = templateLi.content.cloneNode(true);
+    for (let i=0; i<videoList.length; i+= 1){
+        let newMovieLi = templateLi.content.cloneNode(true);
         // 編集
         newMovieLi.querySelector('.movieLi').id = videoList[i]['id']
         newMovieLi.querySelector('.movieLi').addEventListener('click', {index:i ,handleEvent:function(){videoIndex = this.index;specifiedVideos(videoIndex)}}, false);
@@ -147,7 +147,7 @@ function createHtmlMusicList () {
 // 再生中の動画を強調
 function emphasisVideos(){
     // バックグランドの色を変更
-    for (var i=0; i < videoList.length; i++){
+    for (let i=0; i < videoList.length; i++){
         if (videoIndex == i){
             document.getElementById(videoList[i].id).style = 'background-color: rgb(255,255,255,0.5);'
         } else {
@@ -155,7 +155,7 @@ function emphasisVideos(){
         }
     }
     // スクロール 強調したい動画よりも上にスクロール
-    var add = 3
+    let add = 3
     if (videoIndex-add < 0){
         add = 0
     }
@@ -174,7 +174,7 @@ function changeTime () {
     if (videoMax == -1){
         videoMax = player.getDuration()
     }
-    var nowTime = document.getElementById('timeSlider').value
+    let nowTime = document.getElementById('timeSlider').value
     seekTime = (videoMax - videoList[videoIndex].start) * nowTime + videoList[videoIndex].start
     player.seekTo(seekTime, allowSeekAhead=true)
 }
@@ -192,16 +192,16 @@ function changeTimeSlider() {
     if (videoMax == -1){
         videoMax = player.getDuration()
     }
-    var nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
+    let nowTime = (player.getCurrentTime() - videoList[videoIndex].start) / (videoMax - videoList[videoIndex].start)
     // スライダーの変更
     document.getElementById('timeSlider').value = nowTime
     // デジタルタイマーの変更
     // 全体の時間
-    var videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
-    var videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
+    let videoMin = addZero(Math.floor((videoMax - videoList[videoIndex].start)/60)) // 分の作成
+    let videoSec = addZero(Math.floor((videoMax - videoList[videoIndex].start) - videoMin*60)) // 秒の作成
     // 今の時間
-    var nowMin = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) / 60)) // 分の作成
-    var nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
+    let nowMin = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) / 60)) // 分の作成
+    let nowSec = addZero(Math.floor((player.getCurrentTime()- videoList[videoIndex].start) - nowMin*60)) // 秒の作成
     // 表示
     document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
     // playStatusによって動作の終了
@@ -273,26 +273,24 @@ document.getElementById('volume').addEventListener('mouseleave',() => {
     }, 500);
 })
 // 音量のデータ
-var lastVolume = 100
+let lastVolume = 100
 // クッキーから取得
-var cook = document.cookie.split(';')
-for (var i=0; i<cook.length;i++){
+let cook = document.cookie.split(';')
+for (let i=0; i<cook.length;i++){
     if (cook[i].split('=')[0] == ' volume'){
-        var lastVolume = cook[i].split('=')[1]
+        let lastVolume = cook[i].split('=')[1]
         document.getElementById('volumeSlider').value = lastVolume
     }
 }
 // 遅延がないとAPIの読み込みの前に実行される
 setTimeout(function(){player.setVolume(lastVolume)}, 1000)
 // ミュートの判定
-var mute = false
+let mute = false
 // ミュート
 function changeMute (){
     mute = !mute
     if (mute){
         lastVolume = player.getVolume()
-        // なんでこれ？
-        // volume = document.getElementById('volumeSlider').value = 0
         document.getElementById('volumeSlider').value = 0
         player.mute()
         document.getElementById('volumeButton').src = '/static/musicapp/images/volume_off_white_24dp.svg'
@@ -306,7 +304,7 @@ function changeMute (){
 // 音量スライダーの変更
 document.getElementById('volumeSlider').addEventListener('input', changeVolume);
 function changeVolume () {
-    var volume = document.getElementById('volumeSlider').value
+    let volume = document.getElementById('volumeSlider').value
     if (volume == 0 & !mute){
         changeMute()
     } else if (mute){
@@ -321,7 +319,7 @@ function changeVolume () {
 
 
 // ループするのかの指定 true or false
-var repeat = true
+let repeat = true
 // ループをするしないの反転
 function changeRepeat () {
     repeat = !repeat
@@ -335,23 +333,23 @@ function changeRepeat () {
 
 // シャッフル
 function fisherYatesShuffle(arr){
-    for(var i =arr.length-1 ; i>0 ;i-= 1){
-        var j = Math.floor( Math.random() * (i + 1) ); //random index
+    for(let i =arr.length-1 ; i>0 ;i-= 1){
+        let j = Math.floor( Math.random() * (i + 1) ); //random index
         [arr[i],arr[j]]=[arr[j],arr[i]]; // swap
     }
     return arr
 }
 // シャッフル後のインデックスを0にする
-var shuffleDone = false
+let shuffleDone = false
 function videoListShuffle () {
     // シャッフル後のインデックスを0にする
     shuffleDone = true
     // 以前のIDを保存
-    var previousId = videoList[videoIndex].id
+    let previousId = videoList[videoIndex].id
     // videoListをシャッフル
     videoList = fisherYatesShuffle(videoList)
     // 今の動画の新しいインデックスを取得
-    for (var i=0; i<videoList.length; i++) {
+    for (let i=0; i<videoList.length; i++) {
         if (previousId == videoList[i].id){
             videoIndex = i
         }
@@ -365,4 +363,16 @@ function videoListShuffle () {
 window.addEventListener('resize', function () {
     player.setSize(width=document.getElementById('primary').clientWidth-32,
                     height=document.getElementById('primary').clientHeight-32)
+})
+
+// typeの選択
+document.getElementById('selectType').addEventListener('mouseenter',() =>{
+    document.getElementById('selectTypeL').style.display = 'block'
+    // document.getElementById('selectTypeB').style.display = 'none'
+})
+document.getElementById('narrowDown').addEventListener('mouseleave',() =>{
+    setTimeout(()=> {
+        document.getElementById('selectTypeL').style.display = 'none'
+        // document.getElementById('selectTypeB').style.display = 'block'
+    },1000)
 })
