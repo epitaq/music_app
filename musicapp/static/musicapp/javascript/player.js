@@ -292,13 +292,15 @@ let lastVolume = 100
 // クッキーから取得
 let cook = document.cookie.split(';')
 for (let i=0; i<cook.length;i++){
-    if (cook[i].split('=')[0] == ' volume'){
-        let lastVolume = cook[i].split('=')[1]
+    if (cook[i].split('=')[0] == ' volume' || cook[i].split('=')[0] == 'volume'){
+        lastVolume = cook[i].split('=')[1]
         document.getElementById('volumeSlider').value = lastVolume
     }
 }
 // 遅延がないとAPIの読み込みの前に実行される
-setTimeout(function(){player.setVolume(lastVolume)}, 1000)
+setTimeout(() => {
+    player.setVolume(lastVolume)
+}, 1000);
 // ミュートの判定
 let mute = false
 // ミュート
