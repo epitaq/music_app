@@ -28,6 +28,12 @@ class MusicList(models.Model) :
     def __str__(self):
         return self.title
 
-
+# typeごとの再生リスト
+class AssociateTag (models.Model):
+    title = models.CharField(max_length=200) #再生ライブラリ？のタイトル
+    keeping = models.ManyToManyField(Tag) #再生ライブラリ？の再生するタグ
+    comment = models.CharField(max_length=200) #再生ライブラリ？のコメント＆説明
+    def __str__(self):
+        return self.title
 
 
