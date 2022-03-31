@@ -20,12 +20,31 @@
         <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
     </head>
     <body>
+        <!-- 検索 -->
         <div>
-            <form method="POST" action="{% url 'player' %}" class="search">
-                {% csrf_token %}
-                <input type="text" name="q"  placeholder="検索" class="box">
+            <form method="GET" action="{% url 'player' %}" class="search">
+                <input type="text" name="q"  placeholder="検索" class="searchBox">
             </form>
         </div>
+        <!-- タイプの選択 -->
+        <!-- idだけを二次元配列で送る -->
+        <div class="libList">
+            {% for lib in libList %}
+            <a href="{% url 'player' %}?type={{ lib.url }}" class="lib">
+                <div style="margin-left: 21rem; height: 10rem;">
+                    <img src="https://img.youtube.com/vi/{{ lib.photo.0 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(5deg);"><img src="https://img.youtube.com/vi/{{ lib.photo.1 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(-5deg);"><img src="https://img.youtube.com/vi/{{ lib.photo.2 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(0deg);">
+                </div>
+                <div>
+                    <h2>{{ lib.title }}</h2>
+                    <div>{{ lib.comment }}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <!-- <div style="text-align: center; height: 10rem;">
+            <img src="https://img.youtube.com/vi/Cv_2tjVo-p4/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(5deg);"><img src="https://img.youtube.com/vi/fsPSaFbonGo/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(-5deg);"><img src="https://img.youtube.com/vi/D8pdSRs_C4o/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(0deg);">
+        </div> -->
+        <!-- 全ての動画 -->
         <div class="videoList">
             {% for video in videoList %}
                 <a href="{% url 'player' %}?v={{ video.id }}" class="video">

@@ -67,7 +67,7 @@ a {
     -webkit-line-clamp: 2;
 }
 
-.box{
+.searchBox{
     width: 50%;
     padding: 1rem;
     line-height: 1;
@@ -77,4 +77,19 @@ a {
     border-radius: 2em 2em 2em 2em;
     padding-left: 2em;
     padding-right: 1em;
+}
+
+.selectType{
+    width: 15rem;
+    margin-left: -17rem;
+}
+.lib{
+    display: flex;
+    justify-content: center;
+    width: 40rem;
+}
+.libList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
