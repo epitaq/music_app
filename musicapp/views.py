@@ -35,7 +35,7 @@ def player(request):
     print(request.GET.get)
     # タグの一覧
     tag = [type['type'] for type in Tag.objects.all().values()]
-    # タイプの選択 OR検索
+    # タイプの選択 OR検索 ?type=
     if 'type' in request.GET:
         q =Q()
         get_type = request.GET.getlist('type')
@@ -47,7 +47,7 @@ def player(request):
         print('type,Q')
         print(q)
         music_list = music_list.filter(q)
-    # タイトルと名前を一緒に検索 AND検索
+    # タイトルと名前を一緒に検索 AND検索 ?q=
     if 'q' in request.GET:
         q = Q()
         search = request.GET['q'].replace('\u3000', ' ')
@@ -58,7 +58,7 @@ def player(request):
                 # q.add(Q(keeping=Tag.objects.get(type = key)), Q.AND)
                 music_list = music_list.filter(keeping__type=key)
             else:
-                q.add(Q(Q(title__icontains=key) | Q(name__icontains=key)) , Q.AND)
+                q.add(Q(Q(title__icontains=key) | Q(name__icontains=key) | Q(movie=key)) , Q.AND)
         print('q,Q')
         print(q)
         music_list = music_list.filter(q)
