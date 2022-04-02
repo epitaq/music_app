@@ -63,10 +63,13 @@ def player(request):
         print(q)
         music_list = music_list.filter(q)
     #dataを渡す
-    music_data = list(music_list.values())
+    music_data = list(music_list.order_by('?').values())
     context = {
         'data': music_data,
         'keeping': [type['type'] for type in Tag.objects.all().values()]
     }
-
     return render(request, 'musicapp/player.html', context)
+
+def clip(request):
+    context = {}
+    return render(request, 'musicapp/clip.html', context)
