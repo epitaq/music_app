@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="content-language" content="ja">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>clipping</title>
+        <link rel="icon" href="{% static 'musicapp/icon/favicon.ico' %}">
+        <link rel="stylesheet" href="{% static 'musicapp/css/clip.css' %}">
+        <!-- フォント -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div style="display: flex;">
+            <!-- 動画とコンソール関連 -->
+            <div style="width: 50vw;">
+                <div id="player"></div>
+            </div>
+            <!-- dbの表示関連 -->
+            <div style="width: 50vw;">
+                <div>
+                    <!-- 動画IDの入力 -->
+                    <label for="videoId">動画IDを入力</label>
+                    <input type="text" id="videoId">
+                    <!-- 名前の入力 -->
+                    <label for="singer">名前を入力</label>
+                    <input type="text" id="singer">
+                </div>
+                <!-- メインのdata -->
+                <table id="movieData">
+                    <tbody>
+                        <tr>
+                            <th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- 編集中のdata -->
+                <table id="inputData">
+                    <tbody>
+                        <!-- <tr>
+                            <th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th>
+                        </tr> -->
+                        <tr>
+                            <td class="movie"><input type="text" class="inputData " id="inputMovie"></td>
+                            <td class="name"><input type="text" class="inputData" id="inputName"></td>
+                            <td class="title"><input type="text" class="inputData" id="inputTitle"></td>
+                            <td class="start"><input type="text" class="inputData" id="inputStart"></td>
+                            <td class="end"><input type="text" class="inputData" id="inputEnd"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div onclick="getData()">追加</div>
+            </div>
+        </div>
+        <script type="text/javascript" src="{% static 'musicapp/javascript/clip.js' %}"></script>
+    </body>
+</html>

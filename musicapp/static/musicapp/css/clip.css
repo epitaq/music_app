@@ -1,0 +1,38 @@
+/* スクロールバーを変更 */
+::-webkit-scrollbar{
+    width: 10px;
+    }
+::-webkit-scrollbar-track{
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 0 0 2px #fff;
+}
+::-webkit-scrollbar-thumb{
+    background: #aaa;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Kiwi Maru', serif;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration:none;
+    color: white;
+}
+th,td{
+    border:solid 1px #aaaaaa;
+    width: 7rem;
+}
+
+.inputData{
+    width: 6rem;
+}
