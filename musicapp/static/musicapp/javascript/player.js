@@ -1,5 +1,14 @@
-// Djangoからdataを取得
-videoList = JSON.parse(document.getElementById('data').textContent)
+// 動画のリスト
+let videoList = []
+
+if (window.opener){
+    console.log('うつってきた')
+    videoList = window.opener.window.musicData
+} else {
+    // Djangoからdataを取得
+    console.log('Djangoからdataを取得')
+    videoList = JSON.parse(document.getElementById('data').textContent)
+}
 // もし一個も見つからなかったら
 if (videoList.length == 0){
     videoList = [

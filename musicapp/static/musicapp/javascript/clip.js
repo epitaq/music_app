@@ -1,5 +1,3 @@
-
-
 // youtube iframe api
 let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -8,16 +6,13 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        videoId: 'RDHf9Tmdvpk',
+        videoId: '',
         playerVars: {
             fs: 0,
             controls: 1,
         },
         events: {
             onReady : () => {
-                // テスト用
-                let videoId = 'RDHf9Tmdvpk'
-                let singer = '星街すいせい'
                 document.getElementById('videoId').value = videoId
                 document.getElementById('inputMovie').value = videoId
                 document.getElementById('singer').value = singer
@@ -27,8 +22,7 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 編集中のvideoId
-let videoId = ''
+
 // videoIdを元に動画をロード
 document.getElementById('videoId').addEventListener('change', () =>{
     videoId = document.getElementById('videoId').value
@@ -38,8 +32,8 @@ document.getElementById('videoId').addEventListener('change', () =>{
 })
 
 
-// メインのデータ
-let musicData = []
+// メインのデータ open先でも使いたいからVARにしている
+var musicData = []
 // objectsを元にtableを作成
 function createTable(){
     const movieData = document.querySelector("#movieData > tbody")
@@ -59,7 +53,13 @@ function createTable(){
 
 
 // 名前を保存
+// 編集中のvideoId
 let singer = ''
+let videoId = ''
+
+// テスト用
+// let videoId = 'RDHf9Tmdvpk'
+// let singer = '星街すいせい'
 // 初期値の入力
 document.getElementById('videoId').addEventListener('change', () =>{
     document.getElementById('inputMovie').value = videoId
@@ -96,3 +96,57 @@ function getData () {
     }
 }
 
+// 時間を保存
+function saveStart (){
+    let time = Math.floor(player.getCurrentTime())
+    document.getElementById('inputStart').value = time
+}
+function saveEnd (){
+    let time = Math.floor(player.getCurrentTime())
+    document.getElementById('inputEnd').value = time
+}
+
+// 保存
+function dataExport() {
+    // JSON.stringifyで文字列に変換
+    const blob = new Blob([JSON.stringify(musicData, null, '  ')], {
+        type: 'application/json',
+    })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = videoId + '.json' // 出力するファイルの名前
+    link.click()
+    link.remove()
+}
+
+// 離れる時に警告
+window.onbeforeunload = function(e) {
+    e.returnValue = "ページを離れようとしています。よろしいですか？";
+}
+
+// データをアップロード
+const profile_form = document.getElementById('upData')
+profile_form.addEventListener("change", (e) => {
+    var profile = e.target.files[0]
+    var filename = profile.name
+    var type = profile.type
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var reader = new FileReader()
+        reader.readAsText(profile)
+        reader.onload = (file) => {
+        if (type == "application/json") {
+            musicData = JSON.parse(file.target.result)
+            createTable() // テーブルに反映
+            singer = musicData[0].name
+            document.getElementById('singer').value = singer
+            videoId =  musicData[0].movie
+            document.getElementById('videoId').value = videoId
+        } else {
+        }
+        }
+    }
+}, false)
+
+function checkVideo () {
+    window.open('/musicapp/player/')
+}

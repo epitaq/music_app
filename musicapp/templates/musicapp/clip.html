@@ -16,11 +16,20 @@
     <body>
         <div style="display: flex;">
             <!-- 動画とコンソール関連 -->
-            <div style="width: 50vw;">
+            <div style="flex: 1;">
+                <!-- プレイヤー -->
                 <div id="player"></div>
+                <!-- 時間の保存 -->
+                <div>
+                    <div onclick="saveStart()">start</div>
+                    <div onclick="saveEnd()">end</div>
+                </div>
+                <!-- スキップ -->
+                <div>
+                </div>
             </div>
             <!-- dbの表示関連 -->
-            <div style="width: 50vw;">
+            <div style="flex: 1;">
                 <div>
                     <!-- 動画IDの入力 -->
                     <label for="videoId">動画IDを入力</label>
@@ -28,6 +37,8 @@
                     <!-- 名前の入力 -->
                     <label for="singer">名前を入力</label>
                     <input type="text" id="singer">
+                    <label for="upData"></label>
+                    <input type="file" id="upData">
                 </div>
                 <!-- メインのdata -->
                 <table id="movieData">
@@ -53,6 +64,8 @@
                     </tbody>
                 </table>
                 <div onclick="getData()">追加</div>
+                <div onclick="dataExport()">保存</div>
+                <div onclick="checkVideo()">確認</div>
             </div>
         </div>
         <script type="text/javascript" src="{% static 'musicapp/javascript/clip.js' %}"></script>
