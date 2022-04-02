@@ -1,4 +1,4 @@
-# csvを読み込むスクリプト
+# csv,jsonを読み込むスクリプト
 # 主にタグ付けを目的にしている
 # tagとcsv_pathに入力
 
@@ -13,14 +13,16 @@ django.setup()
 
 from musicapp.models import *
 import csv
+import json
 
 
 # 追加するタグをリスト型で保存
-tag = ['ホロライブ','歌ってみた','潤羽るしあ']
+tag = ['ホロライブ','切り抜き']
 # 追加するcsvのpathのリスト デプロイがめんどくさかった
-csv_paths = ['data/uruha.csv']
+data_paths = ['data/RDHf9Tmdvpk.json']
 
-for csv_path in csv_paths:
+
+for data_path in data_paths:
     # 現在登録されているタグ
     c_tag = [str(Tag.objects.all()[i]) for i in range(len(Tag.objects.all()))]
     # 現在登録されていないtagを追加+確認
@@ -29,16 +31,23 @@ for csv_path in csv_paths:
             pass
         else:
             Tag.objects.create(type=i)
-
     # dbに登録
-    with open (csv_path, 'r') as f:
-        csv_r = csv.reader(f)
-        for i in csv_r:
-            print(i[3])
-            new = MusicList.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
-            new.save()
-            for t in tag:
-                new.keeping.add(Tag.objects.get(type=t))
-
+    with open (data_path, 'r') as f:
+        if data_path.count('.csv') > 0:
+            reader = csv.reader(f)
+            for i in reader:
+                print(i[3])
+                new = MusicList.objects.create(movie=i[1], name=i[2], title=i[3], start=i[4], end=i[5])
+                new.save()
+                for t in tag:
+                    new.keeping.add(Tag.objects.get(type=t))
+        elif data_path.count('.json') > 0:
+            reader = json.load(f)
+            for i in reader:
+                print(i['title'])
+                new = MusicList.objects.create(movie=i['movie'], name=i['name'], title=i['title'], start=i['start'], end=i['end'])
+                new.save()
+                for t in tag:
+                    new.keeping.add(Tag.objects.get(type=t))
 
 
