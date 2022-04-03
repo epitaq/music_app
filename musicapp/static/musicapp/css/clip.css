@@ -36,3 +36,7 @@ th,td{
 .inputData{
     width: 6rem;
 }
+
+.skipRange{
+    width: 50%;
+}

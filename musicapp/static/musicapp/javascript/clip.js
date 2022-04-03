@@ -12,12 +12,6 @@ function onYouTubeIframeAPIReady() {
             controls: 1,
         },
         events: {
-            // onReady : () => {
-            //     document.getElementById('videoId').value = videoId
-            //     document.getElementById('inputMovie').value = videoId
-            //     document.getElementById('singer').value = singer
-            //     document.getElementById('inputName').value = singer
-            // }
         }
     });
 }
