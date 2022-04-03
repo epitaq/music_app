@@ -12,12 +12,12 @@ function onYouTubeIframeAPIReady() {
             controls: 1,
         },
         events: {
-            onReady : () => {
-                document.getElementById('videoId').value = videoId
-                document.getElementById('inputMovie').value = videoId
-                document.getElementById('singer').value = singer
-                document.getElementById('inputName').value = singer
-            }
+            // onReady : () => {
+            //     document.getElementById('videoId').value = videoId
+            //     document.getElementById('inputMovie').value = videoId
+            //     document.getElementById('singer').value = singer
+            //     document.getElementById('inputName').value = singer
+            // }
         }
     });
 }
@@ -34,10 +34,12 @@ document.getElementById('videoId').addEventListener('change', () =>{
 
 // メインのデータ open先でも使いたいからVARにしている
 var musicData = []
+
 // objectsを元にtableを作成
 function createTable(){
     const movieData = document.querySelector("#movieData > tbody")
     movieData.innerHTML = '<tr><th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th></tr>'
+    let co = 0
     musicData.forEach((music) =>{
         const tr = document.createElement('tr')
         movieData.appendChild(tr)
@@ -46,9 +48,29 @@ function createTable(){
         obArray.forEach((arr) => {
             const td = document.createElement('td')
             td.textContent = arr[1] // arr[1]はvalueの部分
+            let id = co + arr[0]
+            td.id = id
+            td.addEventListener('dblclick', {id:id,co:co, ty:arr[0], handleEvent:createInput},{once: true})
             tr.appendChild(td)
         })
+        co ++
     })
+}
+function createInput(){
+    console.log(this.id)
+    console.log(this.co)
+    let input = document.createElement('input')
+    let moto = document.getElementById(this.id).innerHTML
+    document.getElementById(this.id).innerHTML = ''
+    input.id = this.id + 'input'
+    input.value = moto
+    input.addEventListener('blur',()=>{
+        musicData[this.co][this.ty] = input.value
+        console.log('でた')
+        createTable()
+    })
+    document.getElementById(this.id).appendChild(input)
+    input.focus()
 }
 
 
