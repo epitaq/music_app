@@ -23,74 +23,76 @@ function onYouTubeIframeAPIReady() {
 }
 
 
-// videoIdを元に動画をロード
-document.getElementById('videoId').addEventListener('change', () =>{
-    videoId = document.getElementById('videoId').value
-    player.cueVideoById({
-        videoId : videoId,
-    })
-})
+// 離れる時に警告
+window.onbeforeunload = function(e) {
+    e.returnValue = "ページを離れようとしています。よろしいですか？";
+}
 
 
 // メインのデータ open先でも使いたいからVARにしている
 var musicData = []
 
-// objectsを元にtableを作成
-function createTable(){
-    const movieData = document.querySelector("#movieData > tbody")
-    movieData.innerHTML = '<tr><th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th></tr>'
-    let co = 0
-    musicData.forEach((music) =>{
-        const tr = document.createElement('tr')
-        movieData.appendChild(tr)
-        // 1行の中を生成
-        const obArray = Object.entries(music)
-        obArray.forEach((arr) => {
-            const td = document.createElement('td')
-            td.textContent = arr[1] // arr[1]はvalueの部分
-            let id = co + arr[0]
-            td.id = id
-            td.addEventListener('dblclick', {id:id,co:co, ty:arr[0], handleEvent:createInput},{once: true})
-            tr.appendChild(td)
-        })
-        co ++
-    })
-}
-function createInput(){
-    console.log(this.id)
-    console.log(this.co)
-    let input = document.createElement('input')
-    let moto = document.getElementById(this.id).innerHTML
-    document.getElementById(this.id).innerHTML = ''
-    input.id = this.id + 'input'
-    input.value = moto
-    input.addEventListener('blur',()=>{
-        musicData[this.co][this.ty] = input.value
-        console.log('でた')
-        createTable()
-    })
-    document.getElementById(this.id).appendChild(input)
-    input.focus()
-}
-
-
-// 名前を保存
-// 編集中のvideoId
-let singer = ''
+// htmlから動画IDと歌った人を取得
 let videoId = ''
+let singer = ''
 
-// テスト用
-// let videoId = 'RDHf9Tmdvpk'
-// let singer = '星街すいせい'
-// 初期値の入力
+// videoIdの変更で動画を変更 & 入力欄のmovieを自動入力
 document.getElementById('videoId').addEventListener('change', () =>{
+    videoId = document.getElementById('videoId').value
+    player.cueVideoById({
+        videoId : videoId,
+    })
+    // 自動入力
     document.getElementById('inputMovie').value = videoId
 })
+// 入力欄のnameを自動入力
 document.getElementById('singer').addEventListener('change', () =>{
     singer = document.getElementById('singer').value
     document.getElementById('inputName').value = singer
 })
-// データの取得 ボタン
+
+
+
+// musicDataを元にhtmlを作成
+function createTable(){
+    const movieTable = document.querySelector("#movieData > tbody")
+    movieTable.innerHTML = '<tr><th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th></tr>'
+    let count = 0 // id用の通し番号
+    musicData.forEach((music) => {
+        const tr = document.createElement('tr')
+        movieTable.appendChild(tr)
+        // 中の内容
+        const obArray = Object.entries(music)
+        obArray.forEach((arr) =>{
+            const td = document.createElement('td')
+            td.textContent = arr[1] // arrのキーを抜いた部分
+            let id = count + arr[0] // 要素のid
+            td.id = id
+            td.addEventListener('dblclick', {id:id, count:count, type:arr[0], handleEvent:changeInput}, {once: true})
+            tr.appendChild(td)
+        })
+        count++
+    })
+}
+// クリックされたら入力欄に変更
+function changeInput(){
+    let input = document.createElement('input')
+    let original = document.getElementById(this.id)
+    let originalValue = original.innerHTML // 元の値を
+    original.innerHTML = '' // 元の中身を初期化
+    input.value = originalValue //inputに元の値を入れる
+    // フォーカスが外れたら元に戻す
+    input.addEventListener('blur', () => {
+        musicData[this.count][this.type] = input.value
+        // テーブルを再描画
+        createTable()
+    })
+    original.appendChild(input)
+    input.focus()
+}
+
+
+// 記入欄の取得 ボタン
 function getData () {
     // データの取得
     let movieData = document.getElementById('inputMovie').value
@@ -118,35 +120,8 @@ function getData () {
     }
 }
 
-// 時間を保存
-function saveStart (){
-    let time = Math.floor(player.getCurrentTime())
-    document.getElementById('inputStart').value = time
-}
-function saveEnd (){
-    let time = Math.floor(player.getCurrentTime())
-    document.getElementById('inputEnd').value = time
-}
 
-// 保存
-function dataExport() {
-    // JSON.stringifyで文字列に変換
-    const blob = new Blob([JSON.stringify(musicData, null, '  ')], {
-        type: 'application/json',
-    })
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(blob)
-    link.download = videoId + '.json' // 出力するファイルの名前
-    link.click()
-    link.remove()
-}
-
-// 離れる時に警告
-window.onbeforeunload = function(e) {
-    e.returnValue = "ページを離れようとしています。よろしいですか？";
-}
-
-// データをアップロード
+// データのインポート
 const profile_form = document.getElementById('upData')
 profile_form.addEventListener("change", (e) => {
     var profile = e.target.files[0]
@@ -168,7 +143,33 @@ profile_form.addEventListener("change", (e) => {
         }
     }
 }, false)
+// データのエクスポート
+function dataExport() {
+    // JSON.stringifyで文字列に変換
+    const blob = new Blob([JSON.stringify(musicData, null, '  ')], {
+        type: 'application/json',
+    })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = videoId + '.json' // 出力するファイルの名前
+    link.click()
+    link.remove()
+}
 
+
+// 時間を保存
+function saveStart (){
+    let time = Math.floor(player.getCurrentTime())
+    document.getElementById('inputStart').value = time
+}
+function saveEnd (){
+    let time = Math.floor(player.getCurrentTime())
+    document.getElementById('inputEnd').value = time
+}
+
+
+// 作成したデータを確認
+// データはopenerから取得される
 function checkVideo () {
     window.open('/musicapp/player/')
 }
