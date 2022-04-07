@@ -4,12 +4,14 @@ let videoList = []
 if (window.opener){
     console.log('うつってきた')
     videoList = window.opener.window.musicData
+    for (let i=0;i<videoList.length;i++){
+        videoList[i].id = i
+    }
 } else {
     // Djangoからdataを取得
     console.log('Djangoからdataを取得')
     videoList = JSON.parse(document.getElementById('data').textContent)
     for (let i=0;i<videoList.length;i++){
-        console.log(i)
         videoList[i].id = i
     }
 }
@@ -191,8 +193,19 @@ function emphasisVideos(){
 
 
 // 時間管理のスライダー 指定時間に飛ぶ
-document.getElementById('timeSlider').addEventListener('input', changeTime);
-function changeTime () {
+let seek = false // seekTo中にスライダーの動作を停止、マウスを離したらON
+document.getElementById('timeSlider').addEventListener('input', () => {
+    seek = true // スライダー管理
+    let videoMax = videoList[videoIndex].end-0
+    let videoStart = videoList[videoIndex].start-0
+    if (videoMax == -1){
+        videoMax = player.getDuration()
+    }
+    let nowTime = document.getElementById('timeSlider').value
+    let seekTime = (videoMax - videoStart) * nowTime + videoStart
+    player.seekTo(seekTime, allowSeekAhead=false)
+})
+document.getElementById('timeSlider').addEventListener('change',() =>{
     let videoMax = videoList[videoIndex].end-0
     let videoStart = videoList[videoIndex].start-0
     if (videoMax == -1){
@@ -201,7 +214,10 @@ function changeTime () {
     let nowTime = document.getElementById('timeSlider').value
     let seekTime = (videoMax - videoStart) * nowTime + videoStart
     player.seekTo(seekTime, allowSeekAhead=true)
-}
+    player.playVideo() // 再生
+    seek = false // スライダー管理
+    changeTimeSlider() // スライダーを起動
+})
 // 時間用の0を追加
 function addZero (num) {
     if (num < 10){
@@ -245,8 +261,8 @@ function changeTimeSlider() {
         // 表示
         document.getElementById('digitalTimer').innerHTML = nowMin + ':' + nowSec + '/' + videoMin + ':' + videoSec
     }
-    // playStatusによって動作の終了
-    if (playStatus == 1){
+    // playStatusによって動作の終了 seek中は停止
+    if (playStatus == 1 && !seek){
         setTimeout(changeTimeSlider, 200)
     } else {
         return 0
