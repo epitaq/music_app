@@ -14,12 +14,15 @@
     box-shadow: none;
 }
 
+
 * {
     margin: 0;
     box-sizing: border-box;
 }
 body {
     font-family: 'Kiwi Maru', serif;
+    display: flex;
+    margin: 3rem;
 }
 ul {
     list-style: none;
@@ -32,19 +35,29 @@ th,td{
     border:solid 1px #aaaaaa;
 }
 
-.inputData{
-    width: 100%;
-}
 
+.workspace{
+    flex: 1;
+}
 .skipRange{
     width: 50%;
 }
-
-.thk{
+.table{
+    width: 100%;
+}
+#movieData{
+    margin-top: 1rem;
+}
+.inputData{
+    width: 100%;
+}
+.addSaveCheck{
     display: flex;
 }
-
-.thkB{
-    width: 1rem;
+.addSaveCheckButton{
+    margin: 0 0.5rem;
+}
+.buttonImg{
     height: 1rem;
+    width: 1rem;
 }

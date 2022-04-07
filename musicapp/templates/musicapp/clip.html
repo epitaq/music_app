@@ -14,74 +14,70 @@
         <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div style="display: flex; margin: 0 3rem;">
-            <!-- 動画とコンソール関連 -->
-            <div style="flex: 1;">
-                <!-- プレイヤー -->
-                <div id="player"></div>
-                <!-- 時間の保存 -->
-                <div>
-                    <div onclick="saveStart()">start</div>
-                    <div onclick="saveEnd()">end</div>
-                </div>
-                <!-- スキップ -->
-                <div>
-                    -15秒<input type="range" min="-15" max="15" step="0.1" value="0" id="skipRange" class="skipRange" list="timeList">15秒
-                            <datalist id="timeList">
-                                <option value="-15"></option>
-                                <option value="-12"></option>
-                                <option value="-9"></option>
-                                <option value="-6"></option>
-                                <option value="-3"></option>
-                                <option value="0"></option>
-                                <option value="3"></option>
-                                <option value="6"></option>
-                                <option value="9"></option>
-                                <option value="12"></option>
-                                <option value="15"></option>
-                            </datalist>
-                </div>
+        <!-- 左側 -->
+        <div class="workspace">
+            <!-- プレイヤー -->
+            <div id="player"></div>
+            <!-- 時間の記録ボタン -->
+            <div>
+                <div onclick="saveStart()">初めの時間を記録</div>
+                <div onclick="saveEnd()">終わりの時間を記録</div>
             </div>
-            <!-- dbの表示関連 -->
-            <div style="flex: 1;">
-                <div>
-                    <!-- 動画IDの入力 -->
-                    <label for="videoId">動画IDを入力</label>
-                    <input type="text" id="videoId">
-                    <!-- 名前の入力 -->
-                    <label for="singer">名前を入力</label>
-                    <input type="text" id="singer">
-                    <label for="upData"></label>
-                    <input type="file" id="upData">
-                </div>
-                <!-- メインのdata -->
-                <table id="movieData" style="width: 100%;">
-                    <tbody>
-                        <tr>
-                            <th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- 編集中のdata -->
-                <table id="inputData" style="width: 100%;">
-                    <tbody>
-                        <!-- <tr>
-                            <th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th>
-                        </tr> -->
-                        <tr>
-                            <td class="movie"><input type="text" class="inputData " id="inputMovie" placeholder="movie"></td>
-                            <td class="name"><input type="text" class="inputData" id="inputName" placeholder="name"></td>
-                            <td class="title"><input type="text" class="inputData" id="inputTitle" placeholder="title"></td>
-                            <td class="start"><input type="text" class="inputData" id="inputStart" placeholder="start"></td>
-                            <td class="end"><input type="text" class="inputData" id="inputEnd" placeholder="end"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="thk">
-                    <div onclick="getData()" style="margin-left: auto;"><img src="{% static 'musicapp/images/playlist_add_black_24dp.svg' %}" class="thkB"> 追加</div>
-                    <div onclick="dataExport()"><img src="{% static 'musicapp/images/save_alt_black_24dp.svg' %}" class="thkB">保存</div>
-                    <div onclick="checkVideo()"><img src="{% static 'musicapp/images/done_black_24dp.svg' %}" class="thkB">確認</div>
-                </div>
+            <!-- スキップスライダー -->
+            <div>
+                -15秒<input type="range" min="-15" max="15" step="0.1" value="0" id="skipRange" class="skipRange" list="timeList">15秒
+                    <datalist id="timeList">
+                        <option value="-15"></option>
+                        <option value="-12"></option>
+                        <option value="-9"></option>
+                        <option value="-6"></option>
+                        <option value="-3"></option>
+                        <option value="0"></option>
+                        <option value="3"></option>
+                        <option value="6"></option>
+                        <option value="9"></option>
+                        <option value="12"></option>
+                        <option value="15"></option>
+                    </datalist>
+            </div>
+        </div>
+        <!-- 右側 -->
+        <div class="workspace">
+            <!-- 動画情報 -->
+            <div>
+                <!-- 動画IDの入力 -->
+                <label for="videoId">動画IDを入力</label>
+                <input type="text" id="videoId">
+                <!-- 名前の入力 -->
+                <label for="singer">名前を入力</label>
+                <input type="text" id="singer">
+                <label for="upData"></label>
+                <input type="file" id="upData">
+            </div>
+            <!-- 保存されたデータの表 -->
+            <table id="movieData" class="table">
+                <tbody>
+                    <tr>
+                        <th>movie</th><th>name</th><th>title</th><th>start</th><th>end</th>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 入力表 -->
+            <table id="inputData" class="table">
+                <tbody>
+                    <tr>
+                        <td class="movie"><input type="text" class="inputData" id="inputMovie" placeholder="movie"></td>
+                        <td class="name"><input type="text" class="inputData" id="inputName" placeholder="name"></td>
+                        <td class="title"><input type="text" class="inputData" id="inputTitle" placeholder="title"></td>
+                        <td class="start"><input type="text" class="inputData" id="inputStart" placeholder="start"></td>
+                        <td class="end"><input type="text" class="inputData" id="inputEnd" placeholder="end"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="addSaveCheck">
+                <div onclick="getData()" class="addSaveCheckButton" style="margin-left: auto;"><img src="{% static 'musicapp/images/playlist_add_black_24dp.svg' %}" class="buttonImg"> 追加</div>
+                <div onclick="dataExport()" class="addSaveCheckButton"><img src="{% static 'musicapp/images/save_alt_black_24dp.svg' %}" class="buttonImg">保存</div>
+                <div onclick="checkVideo()" class="addSaveCheckButton"><img src="{% static 'musicapp/images/done_black_24dp.svg' %}" class="buttonImg">確認</div>
             </div>
         </div>
         <script type="text/javascript" src="{% static 'musicapp/javascript/clip.js' %}"></script>
