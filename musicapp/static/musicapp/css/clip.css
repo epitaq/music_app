@@ -30,13 +30,21 @@ a {
 }
 th,td{
     border:solid 1px #aaaaaa;
-    width: 7rem;
 }
 
 .inputData{
-    width: 6rem;
+    width: 100%;
 }
 
 .skipRange{
     width: 50%;
+}
+
+.thk{
+    display: flex;
+}
+
+.thkB{
+    width: 1rem;
+    height: 1rem;
 }

@@ -167,3 +167,12 @@ function saveEnd (){
 function checkVideo () {
     window.open('/musicapp/player/')
 }
+
+
+// スキップスライダー
+document.getElementById('skipRange').addEventListener('change',() => {
+    let current = player.getCurrentTime()
+    let skip = document.getElementById('skipRange').value - 0
+    player.seekTo(seconds=current+skip, allowSeekAhead=true)
+    document.getElementById('skipRange').value = 0
+})
