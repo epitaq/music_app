@@ -11,9 +11,6 @@ if (window.opener){
     // Djangoからdataを取得
     console.log('Djangoからdataを取得')
     videoList = JSON.parse(document.getElementById('data').textContent)
-    for (let i=0;i<videoList.length;i++){
-        videoList[i].id = i
-    }
 }
 // もし一個も見つからなかったら
 if (videoList.length == 0){

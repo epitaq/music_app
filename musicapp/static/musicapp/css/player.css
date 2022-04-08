@@ -19,7 +19,7 @@
     box-sizing: border-box;
 }
 body {
-    overflow-y: hidden;
+    overflow: hidden;
     background-color: black;
     color:  white;
     font-family: 'Kiwi Maru', serif;
@@ -36,23 +36,20 @@ a {
     height: 32px;
     text-align: center;
 }
-.columns{
-    display: flex;
-    width: 100%;
-    height: calc(100vh - 76px - 32px);
-    padding: 0 56px;
-}
-.columnsChild{
-    flex: 1;
-    width: 100%;
-    height: calc(100vh - 76px - 32px);
-}
+
 /* .primary{} */
-.player{
-    padding: 16px;
+.primary{
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+}
+#player{
+    /* padding: 16px; */
     height: 100%;
 }
-/* .secondary{} */
+.secondary{
+    height: 50vh;
+}
 .narrowDown{
     height: 24px;
     display: flex;
@@ -160,3 +157,24 @@ a {
 /* .volumeRepeatShuffle{
     display: flex;
 } */
+
+/* 画面サイズが480pxからはここを読み込む */
+@media screen and (min-width:480px) {
+    /* body {
+        overflow-y: hidden;
+    } */
+    .columns{
+        display: flex;
+        width: 100%;
+        height: calc(100vh - 76px - 32px);
+        padding: 0 56px;
+    }
+    .primary{
+        height: calc(100vh - 76px - 32px);
+    }
+    .columnsChild{
+        flex: 1;
+        width: 100%;
+        height: calc(100vh - 76px - 32px);
+    }
+}
