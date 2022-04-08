@@ -111,6 +111,7 @@ a {
     height: 76px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .timeSlider{
     position: absolute;
@@ -194,5 +195,8 @@ a {
     }
     #VRS{
         display: flex;
+    }
+    #skipPrevious{
+        /* margin-left: 56px */
     }
 }
