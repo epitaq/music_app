@@ -68,7 +68,7 @@ a {
 }
 
 .searchBox{
-    width: 50%;
+    width: 100%;
     padding: 1rem;
     line-height: 1;
     border: 1px solid #000000;
@@ -84,7 +84,7 @@ a {
     margin-left: -17rem;
 }
 .lib{
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     width: 40rem;
     margin: 1.5rem 0;
@@ -93,4 +93,16 @@ a {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+@media screen and (min-width:768px) {
+    .lib{
+        display: flex;
+    }
+}
+
+@media screen and (min-aspect-ratio: 1/2){
+    .searchBox{
+        width: 50%;
+    }
 }
