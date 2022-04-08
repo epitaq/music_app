@@ -49,7 +49,7 @@ a {
     height: 100%;
 }
 .secondary{
-    height: 50vh;
+    height: calc(70vh - 76px - 32px);
     margin: 0 1rem;
 }
 .narrowDown{
