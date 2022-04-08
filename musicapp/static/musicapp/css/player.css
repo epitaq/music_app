@@ -168,10 +168,7 @@ a {
 } */
 
 /* 画面サイズが480pxからはここを読み込む */
-@media screen and (min-width:480px) {
-    /* body {
-        overflow-y: hidden;
-    } */
+@media screen and (min-aspect-ratio: 1/1) {
     .columns{
         display: flex;
         width: 100%;
