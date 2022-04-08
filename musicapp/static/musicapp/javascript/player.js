@@ -178,6 +178,9 @@ function emphasisVideos(){
     }
     // スクロール 強調したい動画よりも上にスクロール
     let add = 3
+    if (screen.width < 480){
+        add = 0
+    }
     if (videoIndex-add < 0){
         add = videoIndex
     }
