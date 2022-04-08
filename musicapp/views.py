@@ -21,7 +21,7 @@ def home(request):
         libList.append({'url':que[1:], 'photo':[music.movie for music in randomMusicList3], 'title':ass.title, 'comment':ass.comment})
     print(libList)
     # videoList
-    videoList = list(MusicList.objects.all().values())
+    videoList = list(MusicList.objects.all().values())[:50]
     random_videoList = random.sample(videoList, len(videoList))
     context = {
         'libList' : libList,
@@ -63,7 +63,7 @@ def player(request):
         print(q)
         music_list = music_list.filter(q)
     #dataを渡す
-    music_data = list(music_list.order_by('?').values())
+    music_data = list(music_list.order_by('?')[:100].values())
     context = {
         'data': music_data,
         'keeping': [type['type'] for type in Tag.objects.all().values()]
