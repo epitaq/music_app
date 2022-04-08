@@ -19,7 +19,9 @@
     </head>
     <body>
         <header class="header">
-            <a href="{% url 'home' %}">music_app</a>
+            <a href="{% url 'home' %}" class="headerURL">home</a>
+            <a href="{% url 'player' %}" class="headerURL">player</a>
+            <a href="{% url 'clipping' %}" class="headerURL">切り抜き</a>
         </header>
         <!-- 動画と動画再生リスト -->
         <div class="columns">

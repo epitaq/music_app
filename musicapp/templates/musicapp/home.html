@@ -20,6 +20,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&display=swap" rel="stylesheet">
     </head>
     <body>
+        <header class="header">
+            <a href="{% url 'home' %}" class="headerURL">home</a>
+            <a href="{% url 'player' %}" class="headerURL">player</a>
+            <a href="{% url 'clipping' %}" class="headerURL">切り抜き</a>
+        </header>
         <!-- 検索 -->
         <div>
             <form method="GET" action="{% url 'player' %}" class="search">

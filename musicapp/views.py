@@ -19,7 +19,7 @@ def home(request):
         # 条件から三つランダムで取得
         randomMusicList3 = MusicList.objects.filter(q).order_by('?')[:3]
         libList.append({'url':que[1:], 'photo':[music.movie for music in randomMusicList3], 'title':ass.title, 'comment':ass.comment})
-    print(libList)
+    # print(libList)
     # videoList
     videoList = list(MusicList.objects.all().values())[:50]
     random_videoList = random.sample(videoList, len(videoList))
@@ -70,6 +70,6 @@ def player(request):
     }
     return render(request, 'musicapp/player.html', context)
 
-def clip(request):
+def clipping(request):
     context = {}
     return render(request, 'musicapp/clip.html', context)

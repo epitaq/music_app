@@ -29,6 +29,14 @@ a {
     color: white;
 }
 
+.header{
+    height: 32px;
+    text-align: center;
+}
+.headerURL{
+    margin: 0 3rem;
+}
+
 .search{
     display: flex;
     justify-content: center;
