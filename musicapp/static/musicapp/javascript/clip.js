@@ -6,6 +6,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let player;
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
+        width: document.getElementById('primary').clientWidth-32,
         videoId: '',
         playerVars: {
             fs: 0,
@@ -175,4 +176,11 @@ document.getElementById('skipRange').addEventListener('change',() => {
     let skip = document.getElementById('skipRange').value - 0
     player.seekTo(seconds=current+skip, allowSeekAhead=true)
     document.getElementById('skipRange').value = 0
+})
+
+
+// ウィンドウサイズが変わったら動画サイズも変更
+window.addEventListener('resize', function () {
+    player.setSize(width=document.getElementById('primary').clientWidth-32,
+                    (height=document.getElementById('primary').clientWidth-32)*(3/4))
 })
