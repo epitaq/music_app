@@ -19,7 +19,7 @@ import json
 # 追加するタグをリスト型で保存
 tag = ['ホロライブ','切り抜き']
 # 追加するcsvのpathのリスト デプロイがめんどくさかった
-data_paths = ['data/RDHf9Tmdvpk.json']
+data_paths = ['data/czfjbNitJ4M.json']
 
 
 for data_path in data_paths:
