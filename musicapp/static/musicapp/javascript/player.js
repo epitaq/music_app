@@ -415,13 +415,13 @@ window.addEventListener('resize', function () {
 
 
 // typeの選択
-document.getElementById('selectType').addEventListener('click',() =>{
-    document.getElementById('selectTypeL').style.display = 'block'
-    // document.getElementById('selectTypeB').style.display = 'none'
-})
-document.getElementById('narrowDown').addEventListener('mouseleave',() =>{
-    setTimeout(()=> {
-        document.getElementById('selectTypeL').style.display = 'none'
-        // document.getElementById('selectTypeB').style.display = 'block'
-    },1000)
-})
+// document.getElementById('selectType').addEventListener('click',() =>{
+//     document.getElementById('selectTypeL').style.display = 'block'
+//     // document.getElementById('selectTypeB').style.display = 'none'
+// })
+// document.getElementById('narrowDown').addEventListener('mouseleave',() =>{
+//     setTimeout(()=> {
+//         document.getElementById('selectTypeL').style.display = 'none'
+//         // document.getElementById('selectTypeB').style.display = 'block'
+//     },1000)
+// })

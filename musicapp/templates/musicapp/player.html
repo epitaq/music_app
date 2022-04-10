@@ -38,14 +38,14 @@
                             <!-- ボタン -->
                             <p id="selectTypeB" style="text-align: right;">選択</p>
                             <!-- type選択 -->
-                            <div class="checkbox" style="display: none;" id="selectTypeL" >
-                                <!-- Djangoで自動作成 -->
-                                {% for type in keeping %}
-                                    <label style="display: block;">
-                                        <input type="checkbox" name="type" value="{{ type }}" >{{ type }}
-                                    </label>
-                                {% endfor %}
-                            </div>
+                                <!-- <div class="checkbox" style="display: none;" id="selectTypeL" > -->
+                                    <!-- Djangoで自動作成 -->
+                                    <!-- {% for type in keeping %}
+                                        <label style="display: block;">
+                                            <input type="checkbox" name="type" value="{{ type }}" >{{ type }}
+                                        </label>
+                                    {% endfor %}
+                                </div> -->
                         </div>
                         <input type="text" name="q"  placeholder="検索">
                         <button type="submit">検索</button>
