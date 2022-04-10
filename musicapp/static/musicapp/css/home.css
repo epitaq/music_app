@@ -49,15 +49,15 @@ a {
     justify-content: center;
 }
 .video{
-    height: 15rem;
-    width: 16rem;
+    height: 13rem;
+    width: 14rem;
     overflow-x: hidden;
     line-height: 1.4;
     margin:0.5rem 1rem;
     overflow: hidden;
 }
 .img{
-    width: 16rem;
+    width: 14rem;
 }
 .title{
     overflow: hidden;
@@ -88,13 +88,13 @@ a {
 }
 
 .selectType{
-    width: 15rem;
-    margin-left: -17rem;
+    width: 13rem;
+    margin-left: -15rem;
 }
 .lib{
     /* display: flex; */
     justify-content: center;
-    width: 40rem;
+    width: 32rem;
     margin: 1.5rem 0;
 }
 .libList{
