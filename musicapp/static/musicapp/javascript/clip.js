@@ -32,21 +32,31 @@ let videoId = ''
 let singer = ''
 
 // videoIdの変更で動画を変更 & 入力欄のmovieを自動入力
-document.getElementById('videoId').addEventListener('change', () =>{
+document.getElementById('videoId').addEventListener('change', videoIdChange)
+function videoIdChange(){
     videoId = document.getElementById('videoId').value
     player.cueVideoById({
         videoId : videoId,
     })
     // 自動入力
     document.getElementById('inputMovie').value = videoId
-})
+}
 // 入力欄のnameを自動入力
-document.getElementById('singer').addEventListener('change', () =>{
+document.getElementById('singer').addEventListener('change', singerChange)
+function singerChange(){
     singer = document.getElementById('singer').value
     document.getElementById('inputName').value = singer
-})
+}
 
 
+// 時間用の0を追加
+function addZero (num) {
+    if (num < 10){
+        return '0'+num
+    } else {
+        return num+''
+    }
+}
 
 // musicDataを元にhtmlを作成
 function createTable(){
@@ -60,7 +70,14 @@ function createTable(){
         const obArray = Object.entries(music)
         obArray.forEach((arr) =>{
             const td = document.createElement('td')
-            td.textContent = arr[1] // arrのキーを抜いた部分
+            // startとendの時秒数をmm：ssに変更
+            if (arr[0] == 'start' || arr[0] == 'end'){
+                let videoMin = addZero(Math.floor(arr[1] /60)) // 分の作成
+                let videoSec = addZero(Math.floor(arr[1]  - videoMin*60)) // 秒の作成
+                td.textContent = videoMin + ':' + videoSec
+            } else {
+                td.textContent = arr[1] // arrのキーを抜いた部分
+            }
             let id = count + arr[0] // 要素のid
             td.id = id
             td.addEventListener('dblclick', {id:id, count:count, type:arr[0], handleEvent:changeInput}, {once: true})
@@ -134,6 +151,9 @@ profile_form.addEventListener("change", (e) => {
             document.getElementById('singer').value = singer
             videoId =  musicData[0].movie
             document.getElementById('videoId').value = videoId
+            // playerとdataに反映
+            videoIdChange()
+            singerChange()
         } else {
         }
         }
