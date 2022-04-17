@@ -19,7 +19,7 @@ def home(request):
         # 条件から三つランダムで取得
         randomMusicList3 = MusicList.objects.filter(q).order_by('?')[:3]
         libList.append({
-            'url':que[1:],
+            'url':ass.title,
             'photo':[music.movie for music in randomMusicList3],
             'title':ass.title, 'comment':ass.comment
             })
@@ -32,14 +32,13 @@ def home(request):
     return render(request, 'musicapp/home.html', context)
 
 def player(request):
-    music_list = MusicList.objects
     #getの確認＋dbを叩く
     print(request.GET.get)
     # タグの一覧
     tag = [type['type'] for type in Tag.objects.all().values()]
     # Qを先に作ってから最後に一回だけfilter
     q = Q()
-    q.add(Q(), Q.OR) # 一番最初のQがANDになる
+    # q.add(Q(), Q.OR) # 一番最初のQがANDになる
     # タイプの選択 OR検索 ?type=
     if 'type' in request.GET:
         # q =Q()
@@ -59,12 +58,21 @@ def player(request):
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
-                q.add(Q(keeping__type=key), Q.AND)
+                q.add(Q(keeping__type=key), Q.AND) # 複数検索した場合帰ってこない、keepingはリストになっているから1つの選択肢をANDで結んだ時は帰ってこない？
             else:
                 q.add(Q(Q(title__icontains=key) | Q(name__icontains=key) | Q(movie=key)) , Q.AND)
         print('q,Q')
         print(q)
-    #dataを渡す
+    # Associate tags AND ?acc=
+    if 'acc' in request.GET:
+        accTag = [i['title'] for i in list(AssociateTag.objects.all().values())]
+        if request.GET['acc'] in accTag:
+            print(request.GET['acc'])
+            acc = AssociateTag.objects.get(title=request.GET['acc']).keeping.all()
+            for i in acc:
+                q.add(Q(keeping__type=i), Q.OR)
+        print(q)
+    print(q)
     # 重複の削除
     music_data = list(MusicList.objects.filter(q).distinct().values())
     # シャッフル
