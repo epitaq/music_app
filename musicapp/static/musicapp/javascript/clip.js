@@ -76,6 +76,7 @@ function changeInput(){
     let originalValue = original.innerHTML // 元の値を
     original.innerHTML = '' // 元の中身を初期化
     input.value = originalValue //inputに元の値を入れる
+    input.style.width = '100%'
     // フォーカスが外れたら元に戻す
     input.addEventListener('blur', () => {
         musicData[this.count][this.type] = input.value
