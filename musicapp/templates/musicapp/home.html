@@ -35,7 +35,7 @@
         <!-- idだけを二次元配列で送る -->
         <div class="libList">
             {% for lib in libList %}
-            <a href="{% url 'player' %}?type={{ lib.url }}" class="lib">
+            <a href="{% url 'player' %}?acc={{ lib.url }}" class="lib">
                 <div style="margin-left: 19rem; height: 10rem;">
                     <img src="https://img.youtube.com/vi/{{ lib.photo.0 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(5deg);"><img src="https://img.youtube.com/vi/{{ lib.photo.1 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(-5deg);"><img src="https://img.youtube.com/vi/{{ lib.photo.2 }}/mqdefault.jpg" alt="" class="selectType" style="transform: rotateZ(0deg);">
                 </div>
