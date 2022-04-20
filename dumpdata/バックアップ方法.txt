@@ -2,3 +2,6 @@ https://qiita.com/hayato1130/items/c4400dd04f8da5ad9390
 
 全アプリの全テーブルデータを出力
 python manage.py dumpdata > filename.json
+
+データをロード
+python manage.py loaddata <filename>
