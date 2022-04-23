@@ -53,14 +53,25 @@ def player(request):
     # タイトルと名前を一緒に検索 AND検索 ?q=
     if 'q' in request.GET:
         # q = Q()
+        q_tag_list = [] # tagを複数選択できないから後でIDをfilterさせる
+        co = 0
         search = request.GET['q'].replace('\u3000', ' ')
         search = search.split(' ')
         for key in search:
             # タイトルと名前はOR、複数の検索ワードはAND,tagはAND
             if key in tag:
-                q.add(Q(keeping__type=key), Q.AND) # 複数検索した場合帰ってこない、keepingはリストになっているから1つの選択肢をANDで結んだ時は帰ってこない？
+                # 複数条件のために後で検索用
+                q_tag = list(Tag.objects.get(type=key).musiclist_set.all().values())
+                q_tag_list += [q_tag[i]['id'] for i in range(len(q_tag))]
+                co += 1
             else:
                 q.add(Q(Q(title__icontains=key) | Q(name__icontains=key) | Q(movie=key)) , Q.AND)
+        # tag 複数条件
+        if co > 0:
+            q_tag = [x for x in set(q_tag_list) if q_tag_list.count(x) >= co]
+            if len(q_tag) == 0: # 0の場合一つ条件を除外
+                q_tag = [x for x in set(q_tag_list) if q_tag_list.count(x) >= co-1]
+            q.add(Q(pk__in=q_tag), Q.AND)
         print('q,Q')
         print(q)
     # Associate tags AND ?acc=
