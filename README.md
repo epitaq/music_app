@@ -1,8 +1,8 @@
 # music_app
+
+#db更新
+dbの更新は data/add_data.py を変更し実行する。
+今後サイトから変更可能にする予定。
+
 ##　自分用のメモ
-
-dbの更新は管理ページからcsvのインポートで行う
-
-csvの要素は　('id', 'movie', 'name', 'title', 'start', 'end')　この順番
-
-startとendは〜分を〜秒にするプログラムを作ってある
+git push heroku maseter
