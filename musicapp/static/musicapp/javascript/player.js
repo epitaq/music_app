@@ -361,8 +361,8 @@ function changeVolume () {
     } else {
         player.setVolume(volume)
     }
-    // 音量をクッキーに保存 10min
-    document.cookie = "volume=" + volume + ";max-age=86400"
+    // 音量をクッキーに保存 10day
+    document.cookie = "volume=" + volume + ";max-age=864000"
 }
 
 
